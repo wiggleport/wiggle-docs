@@ -1,22 +1,24 @@
-.. Wiggleport documentation master file, created by
-   sphinx-quickstart on Tue Feb  2 14:40:10 2016.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+Wiggleport Documentation
+========================
 
-Welcome to Wiggleport's documentation!
-======================================
+Welcome! This is the documentation for using and extending Wiggleport_.
 
-Contents:
+Wiggleport_ is **coming soon**...
+
+These documents are a work in progress.
+
+.. image:: wiggle-spine.png
+   :width: 400pt
+   :alt: Wiggle Spine sketch
+   :align: center
+
+.. _Wiggleport: http://wiggleport.org
 
 .. toctree::
    :maxdepth: 2
-
-
 
 Indices and tables
 ==================
 
 * :ref:`genindex`
-* :ref:`modindex`
 * :ref:`search`
-
