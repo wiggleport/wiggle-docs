@@ -1,4 +1,9 @@
 API Reference
 =============
 
-APIs, amirite???
+Wiggleport provides Application Programming Interfaces (APIs) for communicating with hardware from various languages:
+
+.. toctree::
+   :glob:
+
+   api/*

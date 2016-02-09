@@ -39,25 +39,27 @@ Here's a review of what a standard JSON_ object might hold:
         wubbalubba: dub dub
 
 
-Values that Change
-==================
+Values that Change — Expressions and Constraints
+================================================
 
 Now talk about expressions, constraints, references, that kind of thing.
 
 
-Stream Objects
-==============
+Stream Objects — Buffers and Patterns
+=====================================
 
 Whereas values are passive unless they're referenced somehow, streams are objects that will be constructed automatically when a model loads. Wiggleport adopts a convention in JSON that a key beginning with "@" signifies that an object will be created when the corresponding part of the model loads.
 
 In the abstract, a stream is an interface for flowing data. Data come packaged as *items* of a fixed or variable size in bits, at either a fixed or variable rate. Concretely, this interface may be backed either by a *buffer* or by a *pattern*.
 
-Buffers
--------
+
+Buffer Streams
+--------------
 
 A thing made of memory! Shared memory even.
 
-Patterns
---------
+
+Pattern Streams
+---------------
 
 State machines, yo.
