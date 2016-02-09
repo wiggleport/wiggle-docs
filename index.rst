@@ -1,9 +1,11 @@
 Welcome to Wiggleport
 =====================
 
-Welcome! This is the documentation for using and extending Wiggleport_.
+*Modular I/O for Multi-channel Sound, Light, and Motion.*
 
-Wiggleport_ is **coming soon** – these documents are a work in progress.
+This is the documentation for using and extending Wiggleport_.
+
+**Coming soon** – these documents are a work in progress.
 
 Contents:
 
