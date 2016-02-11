@@ -14,6 +14,24 @@ Here's a review of what a standard JSON_ object might hold:
 
 .. _JSON: http://json.org
 
+.. js:class:: foo(blah)
+
+.. js:class:: foo blah blah right
+
+.. js:class:: blurrrr
+
+.. js:attribute:: foo.blobble
+
+    yeb.
+
+.. js:attribute:: foo.wudgits
+
+    yeb.
+
+.. js:attribute:: blurrrr.minny.flub
+
+    yeb.
+
 .. code-block:: json
 
     {

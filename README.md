@@ -7,4 +7,6 @@ This repository contains the source code for [docs.wiggleport.org](http://docs.w
 
 If you'd like to build the docs yourself, you will need [Sphinx](http://www.sphinx-doc.org).
 
+    sudo pip install sphinx sphinx_rtd_theme sphinxcontrib-domaintools
+
 Run `make` to get started.

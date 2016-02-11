@@ -1,9 +1,9 @@
-Welcome to Wiggleport
-=====================
+Wiggleport Guidebook
+====================
+
+Welcome to the documentation for using and extending Wiggleport_.
 
 *Modular I/O for Multi-channel Sound, Light, and Motion.*
-
-This is the documentation for using and extending Wiggleport_.
 
 **Coming soon** – these documents are a work in progress.
 
@@ -16,8 +16,10 @@ Contents:
    api
    extending
 
+* :ref:`genindex`
+
 .. image:: wiggle-spine.png
-   :width: 400pt
+   :width: 68%
    :alt: Wiggle Spine sketch
    :align: center
 
