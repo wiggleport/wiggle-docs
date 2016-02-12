@@ -18,8 +18,8 @@ Contents:
 
 * :ref:`genindex`
 
-.. image:: wiggle-spine.png
-   :width: 68%
+.. image:: /images/wiggle-spine.png
+   :width: 75%
    :alt: Wiggle Spine sketch
    :align: center
 

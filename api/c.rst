@@ -11,15 +11,16 @@ Your connection to libwiggleport itself.
 
 .. c:type:: wigl_context
 
-  Placeholder
+	Placeholder
 
 .. c:function:: wigl_context* wigl_context_new(const char* json_options, char** error)
 
-  :param const char* json_options: Blah lorem foo.
+	:param const char* json_options: .. include:: shared/new-context-options.rst
+		This string is required; a NULL pointer here is not valid.
 
 .. c:function:: void wigl_context_unref(wigl_context* ctx)
 
-  Placeholder
+	Placeholder
 
 
 Finding Hardware Models
