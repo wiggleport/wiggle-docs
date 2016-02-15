@@ -28,7 +28,6 @@ sys.path.insert(0, os.path.abspath('_extensions'))
 # ones.
 extensions = [
 	'sphinxcontrib.inlinesyntaxhighlight',
-	'wigldomain'
 ]
 
 # Add any paths that contain templates here, relative to this directory.

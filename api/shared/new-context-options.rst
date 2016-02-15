@@ -1,6 +1,4 @@
 .. highlight:: json
-.. role:: json(code)
-	:language: json
 
 A string containing a JSON object with options for the new context. All values are optional. Default::
 
@@ -10,7 +8,7 @@ A string containing a JSON object with options for the new context. All values a
 	}
 
 @test
-	:json:`[1, 2, true, false, null, "nope"]`
+	``{ "attr": 1, "floobop": null }``
 
 shared
-	optional?
+	optional? Look at :ref:`constructor-test`.
