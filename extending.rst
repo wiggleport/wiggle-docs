@@ -1,6 +1,8 @@
-====================
+.. _extending:
+
+********************
 Extending Wiggleport
-====================
+********************
 
 Wiggleport wants to make it easier for you to create things we've never thought of, without reinventing all the wheels.
 

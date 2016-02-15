@@ -10,5 +10,3 @@ A string containing a JSON object with options for the new context. All values a
 @test
 	``{ "attr": 1, "floobop": null }``
 
-shared
-	optional? Look at :ref:`constructor-test`.

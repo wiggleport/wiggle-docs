@@ -1,8 +1,9 @@
+.. default-role:: literal
 .. _hardware-model:
 
-==============
+**************
 Hardware Model
-==============
+**************
 
 At it's very core, Wiggleport is based on a way of interacting with hardware by *modeling* the way data flows. These models contain anything the computer needs to know about some hardware in order to communicate with it, including how to configure any programmable parts of that hardware. Wiggleport's modularity comes from the way these models can be freely reassembled without rewriting driver software.
 
@@ -55,7 +56,8 @@ JSON_ and YAML_ also both provide the boolean_ values ``true`` and ``false``, as
 
 .. highlight:: yaml
 
-YAML_ lets you document your models using comment lines beginning with ``#``. JSON_ does not support comments at all, since it's designed for computers rather than humans.
+JSON_ does not support comments at all, since it's designed for computers rather than humans.
+YAML_ lets you document your models using comment lines beginning with ``#``.
 
 
 .. _arrays:
@@ -144,10 +146,34 @@ The same object could be represented in JSON_ somewhat more verbosely as::
 References
 ----------
 
-In Wiggleport's use of JSON, we assume every value within an object can be uniquely identified by its name. Values within nested objects can be referenced using a dotted syntax. For example, ``"objects.etc.thing"`` could refer to the value ``99`` in the example above. For this to work, the strings ``"objects"``, ``"etc"``, and ``"thing"`` must all be valid *identifiers*.
+.. highlight:: yaml
+
+In Wiggleport's use of JSON, we assume every value within an object can be uniquely identified by its name. Values within nested objects can be referenced using a dotted syntax. For example, `objects.etc.thing` could refer to the value ``99`` in the example above. For this to work, the strings `objects`, `etc`, and `thing` must all be valid :ref:`identifiers`. The ``42`` above can't be referenced this way, because `and more` is not a valid identifier.
 
 .. productionlist::
     reference: `identifier` ("." `identifier`)*
+
+When a reference is encountered in the model, it must be *resolved* to a specific object by searching for each identifier in turn. The starting point in this search is its *scope*, and in fact each reference typically has access to several nested scopes.
+
+For example, in YAML_, the following references `ref1` through `ref8` are strings interpreted as references according to their location in the model. References `ref1` through `ref4` search only the root scope, whereas references `ref5` through `ref8` have three scopes to search in order: `deeper`, `inside`, then lastly the root object::
+
+    ref1: name                # "outer"
+    ref2: inside.name         # "middle"
+    ref3: inside.deeper.name  # "inner"
+    ref4: deeper.name         # null
+
+    name: outer
+    inside:
+      name: middle
+      deeper:
+        name: inner
+
+        ref5: name                # "inner"
+        ref6: inside.name         # "middle"
+        ref7: deeper.name         # "inner"
+        ref8: inside.deeper.name  # "inner"
+
+The consequences for an invalid reference depend on context. In :ref:`expressions`, there will be a reference resolution error as soon as that part of the model loads.
 
 
 .. _identifiers:
@@ -155,7 +181,9 @@ In Wiggleport's use of JSON, we assume every value within an object can be uniqu
 Identifiers
 -----------
 
-Wiggleport follows in the footsteps of languages like C++11 and Swift, with a self-contained definition of what constitutes a valid Unicode identifier string. Although there is no requirement that JSON objects use valid identifiers as names, such JSON objects can't be described with a :token:`reference`.
+In short, identifiers are single words that don't start with a number or contain any punctuation other than the underscore (`_`). Identifiers never contain spaces.
+
+For a precise definition of what an Identifier means in Unicode_, Wiggleport follows in the footsteps of languages like C++11 and Swift with a simplified definition that doesn't require hefty character trait tables.
 
 .. productionlist::
     identifier: `id_start` `id_continue`*

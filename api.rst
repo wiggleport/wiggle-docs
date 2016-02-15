@@ -1,5 +1,8 @@
+.. _api-reference:
+
+*************
 API Reference
-=============
+*************
 
 Wiggleport provides Application Programming Interfaces (APIs) for communicating with hardware from various languages:
 
