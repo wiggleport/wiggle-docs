@@ -1,3 +1,4 @@
+.. _hardware-model:
 
 ==============
 Hardware Model
@@ -8,14 +9,15 @@ At it's very core, Wiggleport is based on a way of interacting with hardware by 
 Like the Document Object Model you may be familiar with from web browsers, Wiggleport has a hardware model based on a tree-structured collection of objects. Whereas the web was born from the fairly complex standard that became XML, Wiggleport starts with something simpler: JSON_.
 
 
+.. _modeling-with-json:
+
 Modeling with JSON
 ==================
 
 JSON_ itself is designed to be very simple and unambiguous for software to parse, but it can be inconvenient to read and write by hand. In describing hardware models, we will often use YAML_ as an alternate syntax for these same objects.
 
-.. _JSON: http://json.org
-.. _YAML: http://yaml.org
 
+.. _numbers:
 
 Numbers
 -------
@@ -28,18 +30,19 @@ JSON_ supports integers like ``524287`` and ``-42``, or floating point numbers l
 
 In modeling hardware, it's often helpful to use hexadecimal_ numbers. JSON does not support hexadecimal numbers, but both YAML_ and Wiggleport's :ref:`expressions` support hex numbers like ``0x2AF0`` and ``0x100000000``.
 
-.. _hexadecimal: https://en.wikipedia.org/wiki/Hexadecimal
 
+.. _strings:
 
 Strings
 -------
 
 Strings of Unicode_ characters can take on a variety of roles in Wiggleport's hardware models. Depending on context, a string may be parsed as an :ref:`expression <expressions>`, or it may represent freeform metadata like a device's name or its version.
 
-.. _Unicode: https://en.wikipedia.org/wiki/Unicode
 
 In JSON_, all strings must be surrounded with double-quotes. Much of YAML_'s readability comes from relaxing this requirement. Quotes can often be entirely omitted in YAML_, as the parser assumes any unintelligible data must be a string value.
 
+
+.. _special-values:
 
 Special Values
 --------------
@@ -54,6 +57,8 @@ JSON_ and YAML_ also both provide the boolean_ values ``true`` and ``false``, as
 
 YAML_ lets you document your models using comment lines beginning with ``#``. JSON_ does not support comments at all, since it's designed for computers rather than humans.
 
+
+.. _arrays:
 
 Arrays
 ------
@@ -82,8 +87,12 @@ The equivalent JSON_ for this example would be::
     ]
 
 
+.. _objects:
+
 Objects
 -------
+
+.. highlight:: json
 
 Objects are unordered pairs of names (strings) and values of any type. JSON_ uses a very strict subset of the ``{ "name": "value" }`` syntax that may be familiar from Javascript. YAML_ trades this explicit syntax for a more fluent interpretation based on indentation level and context:
 
@@ -129,14 +138,54 @@ The same object could be represented in JSON_ somewhat more verbosely as::
       ]
     }
 
+
+.. _references:
+
+References
+----------
+
+In Wiggleport's use of JSON, we assume every value within an object can be uniquely identified by its name. Values within nested objects can be referenced using a dotted syntax. For example, ``"objects.etc.thing"`` could refer to the value ``99`` in the example above. For this to work, the strings ``"objects"``, ``"etc"``, and ``"thing"`` must all be valid *identifiers*.
+
+.. productionlist::
+    reference: `identifier` ("." `identifier`)*
+
+
+.. _identifiers:
+
 Identifiers
 -----------
 
+Wiggleport follows in the footsteps of languages like C++11 and Swift, with a self-contained definition of what constitutes a valid Unicode identifier string. Although there is no requirement that JSON objects use valid identifiers as names, such JSON objects can't be described with a :token:`reference`.
 
-In Wiggleport's use of JSON, we assume every value within an object can be uniquely identified by its name. Values within nested objects can be identified using a dotted syntax. For example, ``"objects.etc.thing"`` could refer to the value ``99`` in the example above.
-
-To be addressable using dot notation, JSON object names must contain 
- Names with spaces or dots will conflict with this addressing scheme.
+.. productionlist::
+    identifier: `id_start` `id_continue`*
+    id_start: a-z | A-Z | "_" |
+            : U+00A8 | U+00AA | U+00AD | U+00AF |
+            : U+00B2–U+00B5 | U+00B7–U+00BA |
+            : U+00BC–U+00BE | U+00C0–U+00D6 |
+            : U+00D8–U+00F6 | U+00F8–U+00FF |
+            : U+0100–U+02FF | U+0370–U+167F |
+            : U+1681–U+180D | U+180F–U+1DBF |
+            : U+1E00–U+1FFF | U+200B–U+200D |
+            : U+202A–U+202E | U+203F–U+2040 | U+2054 |
+            : U+2060–U+206F | U+2070–U+20CF |
+            : U+2100–U+218F | U+2460–U+24FF |
+            : U+2776–U+2793 | U+2C00–U+2DFF |
+            : U+2E80–U+2FFF | U+3004–U+3007 |
+            : U+3021–U+302F | U+3031–U+303F |
+            : U+3040–U+D7FF | U+F900–U+FD3D |
+            : U+FD40–U+FDCF | U+FDF0–U+FE1F |
+            : U+FE30–U+FE44 | U+FE47–U+FFFD |
+            : U+10000–U+1FFFD | U+20000–U+2FFFD |
+            : U+30000–U+3FFFD | U+40000–U+4FFFD |
+            : U+50000–U+5FFFD | U+60000–U+6FFFD |
+            : U+70000–U+7FFFD | U+80000–U+8FFFD |
+            : U+90000–U+9FFFD | U+A0000–U+AFFFD |
+            : U+B0000–U+BFFFD | U+C0000–U+CFFFD |
+            : U+D0000–U+DFFFD | U+E0000–U+EFFFD
+    id_continue: `id_start` | 0-9 |
+               : U+0300–U+036F | U+1DC0–U+1DFF |
+               : U+20D0–U+20FF | U+FE20–U+FE2F
 
 
 .. _expressions:
@@ -210,3 +259,10 @@ Pattern Streams
 ---------------
 
 State machines, yo.
+
+
+.. _JSON: http://json.org
+.. _YAML: http://yaml.org
+.. _hexadecimal: https://en.wikipedia.org/wiki/Hexadecimal
+.. _Unicode: https://en.wikipedia.org/wiki/Unicode
+
