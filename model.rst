@@ -25,7 +25,7 @@ Numbers
 
 .. highlight:: json
 
-JSON_ supports integers like ``524287`` and ``-42``, or floating point numbers like ``10.5`` and ``3e8``.  We will refer to these all as *numbers* usually. Integers are automatically promoted to floating point numbers as necessary. Integers are signed 64-bit numbers, and floating point values use 64-bit IEEE double precision.
+JSON_ supports integers like ``524287`` and ``-42``, or floating point numbers like ``10.5`` and ``3e8``.  We will refer to these all as *numbers* usually. Integers are automatically promoted to floating point numbers as necessary. Integers are signed 64-bit numbers, and floating point values use 64-bit `IEEE double`_ precision.
 
 .. highlight:: yaml
 
@@ -156,10 +156,10 @@ When a reference is encountered in the model, it must be *resolved* to a specifi
 
 For example, in YAML_, the following references `ref1` through `ref8` are strings interpreted as references according to their location in the model. References `ref1` through `ref4` search only the root scope, whereas references `ref5` through `ref8` have three scopes to search in order: `deeper`, `inside`, then lastly the root object::
 
-    ref1: name                # "outer"
-    ref2: inside.name         # "middle"
-    ref3: inside.deeper.name  # "inner"
-    ref4: deeper.name         # null
+    ref1: name                # → "outer"
+    ref2: inside.name         # → "middle"
+    ref3: inside.deeper.name  # → "inner"
+    ref4: deeper.name         # → null
 
     name: outer
     inside:
@@ -167,10 +167,10 @@ For example, in YAML_, the following references `ref1` through `ref8` are string
       deeper:
         name: inner
 
-        ref5: name                # "inner"
-        ref6: inside.name         # "middle"
-        ref7: deeper.name         # "inner"
-        ref8: inside.deeper.name  # "inner"
+        ref5: name                # → "inner"
+        ref6: inside.name         # → "middle"
+        ref7: deeper.name         # → "inner"
+        ref8: inside.deeper.name  # → "inner"
 
 The consequences for an invalid reference depend on context. For example, :ref:`expressions` will not parse if any references within fail to resolve. Typically this will lead to a reported error as soon as that part of the model loads.
 
@@ -236,13 +236,41 @@ Valid identifiers::
 .. _expressions:
 
 Expressions
-=================
+===========
 
-Depending on context, part of the hardware model may be interpreted as a *value expression*. 
+.. highlight:: yaml
 
-.. index:: pair: expression; value
+Plain :ref:`numbers` in JSON_ are useful for values that never change: version codes, fixed addresses, communication protocol constants, and so on.
 
-Now talk about expressions, constraints, references, that kind of thing.
+By using *expressions*, the hardware model can represent a graph of related values with a finite space of allowable configurations. Expressions are great for clock rates, hardware settings, volume levels, or any other values that can change but only in carefully controlled ways.
+
+Expressions are :ref:`strings` formatted according to a mini-language that can use :ref:`references` to link with expressions and values elsewhere in the model.
+
+When an expression loads, that expression will resolve to a number right away, but that number may change at any time. As long as the expression is loaded, it has the ability to both observe and influence the other values it's linked to.
+
+Much of the syntax below will seem familiar from other programming languages. Wiggleport expressions adopt a new lexical convention in which operators beginning with a colon (`:`) indicate constraints rather than boolean evaluation.
+
+That got abstract fast, but here's an example. This is a YAML_ object modeling a simple baud_ rate generator. For this to parse, we'll need to know *a priori* that `baud` is an expression. The other expression `clock.rate` can be inferred by its mention in `baud`. ::
+
+  # Model a clock generator that can tune
+  # from 1 MHz to 5 MHz in 100 Hz steps
+
+  clock:
+    minimum_rate: 1000000
+    maximum_rate: 5000000
+    step_size: 100
+    rate: (step_size * :int) :>= minimum_rate :<= maximum_rate
+
+  # The divisor is an integer between 1 and 255, with no default
+
+  divisor: :int :> 0 :< 0x100
+
+  # Here the baud rate itself is calculated, and we set the default.
+  # When this model loads, it will solve for the best configuration
+  # to approximate 19200 baud.
+
+  baud: clock.rate / divisor :~ 19200
+
 
 Constants
 ---------
@@ -250,40 +278,12 @@ Constants
 References
 ----------
 
-Operators
----------
+Arithmetic Operators
+--------------------
 
-.. _add:
+Constraint Operators
+--------------------
 
-\+ (add)
-~~~~~~~~
-
-woobly. :ref:`add` and such? or maybe :ref:`subtract` 
-
-
-.. _subtract:
-
-\- (subtract)
-~~~~~~~~~~~~~
-
-\* (multiply)
-~~~~~~~~~~~~~
-
-\/ (divide)
-~~~~~~~~~~~
-
-<< (left shift)
-~~~~~~~~~~~~~~~
-
->> (right shift)
-~~~~~~~~~~~~~~~~
-
-
-Variables
----------
-
-Constraints
------------
 
 
 Stream Objects
@@ -305,7 +305,8 @@ Pattern Streams
 
 State machines, yo.
 
-
+.. _baud: https://en.wikipedia.org/wiki/Baud
+.. _IEEE double: https://en.wikipedia.org/wiki/Double-precision_floating-point_format
 .. _JSON: http://json.org
 .. _YAML: http://yaml.org
 .. _hexadecimal: https://en.wikipedia.org/wiki/Hexadecimal
