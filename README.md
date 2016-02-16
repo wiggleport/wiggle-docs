@@ -1,5 +1,7 @@
 # Wiggleport documentation source
 
+[![Documentation Status](https://readthedocs.org/projects/wiggleport/badge/?version=latest)](http://docs.wiggleport.org/en/latest/?badge=latest)
+
 This repository contains the source code for [docs.wiggleport.org](http://docs.wiggleport.org)
 
 * [Read the docs online](http://docs.wiggleport.org)
