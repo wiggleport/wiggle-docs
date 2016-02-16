@@ -37,8 +37,7 @@ In modeling hardware, it's often helpful to use hexadecimal_ numbers. JSON does 
 Strings
 -------
 
-Strings of Unicode_ characters can take on a variety of roles in Wiggleport's hardware models. Depending on context, a string may be parsed as an :ref:`expression <expressions>`, or it may represent freeform metadata like a device's name or its version.
-
+Strings of Unicode_ characters can take on a variety of roles in Wiggleport's hardware models. On its own, a string has no implied format. It can represent freeform metadata like a device's name or its version. :ref:`expressions` use specially formatted strings to represent rules for values that can change.
 
 In JSON_, all strings must be surrounded with double-quotes. Much of YAML_'s readability comes from relaxing this requirement. Quotes can often be entirely omitted in YAML_, as the parser assumes any unintelligible data must be a string value.
 
@@ -173,7 +172,7 @@ For example, in YAML_, the following references `ref1` through `ref8` are string
         ref7: deeper.name         # "inner"
         ref8: inside.deeper.name  # "inner"
 
-The consequences for an invalid reference depend on context. In :ref:`expressions`, there will be a reference resolution error as soon as that part of the model loads.
+The consequences for an invalid reference depend on context. For example, :ref:`expressions` will not parse if any references within fail to resolve. Typically this will lead to a reported error as soon as that part of the model loads.
 
 
 .. _identifiers:
@@ -181,9 +180,11 @@ The consequences for an invalid reference depend on context. In :ref:`expression
 Identifiers
 -----------
 
-In short, identifiers are single words that don't start with a number or contain any punctuation other than the underscore (`_`). Identifiers never contain spaces.
+.. highlight:: yaml
 
-For a precise definition of what an Identifier means in Unicode_, Wiggleport follows in the footsteps of languages like C++11 and Swift with a simplified definition that doesn't require hefty character trait tables.
+In short, identifiers are single words that don't start with a number or contain any punctuation other than the underscore (`_`) character. Identifiers never contain spaces.
+
+For a precise definition of what an Identifier means in Unicode_, Wiggleport follows in the footsteps of languages like C++11 and Swift with a simplified definition that doesn't require hefty character trait tables:
 
 .. productionlist::
     identifier: `id_start` `id_continue`*
@@ -214,6 +215,22 @@ For a precise definition of what an Identifier means in Unicode_, Wiggleport fol
     id_continue: `id_start` | 0-9 |
                : U+0300–U+036F | U+1DC0–U+1DFF |
                : U+20D0–U+20FF | U+FE20–U+FE2F
+
+Not valid identifiers::
+
+  9to5: false
+  four-and-six: false
+  four&six: false
+  Why Not: false
+  木.leaves: false
+
+Valid identifiers::
+
+  nineToFive: true
+  four6: true
+  _whoa_there: true
+  กรุงเทพมหานคร: true
+  🐱: true
 
 
 .. _expressions:
