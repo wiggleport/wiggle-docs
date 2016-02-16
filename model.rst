@@ -250,7 +250,7 @@ When an expression loads, that expression will resolve to a number right away, b
 
 Much of the syntax below will seem familiar from other programming languages. Wiggleport expressions adopt a new lexical convention in which operators beginning with a colon (`:`) indicate constraints rather than boolean evaluation.
 
-That got abstract fast, but here's an example. This is a YAML_ object modeling a simple baud_ rate generator. For this to parse, we'll need to know *a priori* that `baud` is an expression. The other expression `clock.rate` can be inferred by its mention in `baud`. ::
+That got abstract fast, but here's an example. This is a YAML_ object modeling a simple baud_ rate generator. For this to parse, we'll need to know *a priori* that `baud` is an expression. The other expressions `clock.rate` and `divisor` can be inferred by their mentions in `baud`. ::
 
   # Model a clock generator that can tune
   # from 1 MHz to 5 MHz in 100 Hz steps
