@@ -69,23 +69,23 @@ Arrays
 JSON_ has simple arrays like ``[1, 2, 3]``. They can hold any number of things, of various types.
 YAML_ supports this compact syntax, as well as a longer format that reads like a list of bullet points::
 
-    - This is a string, beginning a longer list
-    - A second string
-    - [1, 2, 3]
-    -
-      - Pineapple
-      - Kitten
+  - This is a string, beginning a longer list
+  - A second string
+  - [1, 2, 3]
+  -
+    - Pineapple
+    - Kitten
 
 .. highlight:: json
 
 The equivalent JSON_ for this example would be::
 
-    [
-        "This is a string, beginning a longer list",
-        "A second string",
-        [1, 2, 3],
-        ["Pineapple", "Kitten"]
-    ]
+  [
+    "This is a string, beginning a longer list",
+    "A second string",
+    [1, 2, 3],
+    ["Pineapple", "Kitten"]
+  ]
 
 
 .. _objects:
@@ -99,45 +99,45 @@ Objects are unordered pairs of names (strings) and values of any type. JSON_ use
 
 .. code-block:: yaml
 
-    number: 42
-    greeting: Hello, people of Earth!
-    array:
-      - 1
-      - 2
-      - 3
-      - banana   # Comments are okay!
-    objects:
-      etc:
-        thing: 99
-        'and more': 42
-      empty: null
-    boolean:
-      - true
-      - false
+  number: 42
+  greeting: Hello, people of Earth!
+  array:
+    - 1
+    - 2
+    - 3
+    - banana   # Comments are okay!
+  objects:
+    etc:
+      thing: 99
+      'and more': 42
+    empty: null
+  boolean:
+    - true
+    - false
 
 The same object could be represented in JSON_ somewhat more verbosely as::
 
-    {
-      "number": 42,
-      "greeting": "Hello, people of Earth!",
-      "array": [
-        1,
-        2,
-        3,
-        "banana"
-      ],
-      "objects": {
-        "etc": {
-          "thing": 99,
-          "and more": 42
-        },
-        "empty": null
+  {
+    "number": 42,
+    "greeting": "Hello, people of Earth!",
+    "array": [
+      1,
+      2,
+      3,
+      "banana"
+    ],
+    "objects": {
+      "etc": {
+        "thing": 99,
+        "and more": 42
       },
-      "boolean": [
-        true,
-        false
-      ]
-    }
+      "empty": null
+    },
+    "boolean": [
+      true,
+      false
+    ]
+  }
 
 
 .. _references:
@@ -150,27 +150,27 @@ References
 In Wiggleport's use of JSON, we assume every value within an object can be uniquely identified by its name. Values within nested objects can be referenced using a dotted syntax. For example, `objects.etc.thing` could refer to the value ``99`` in the example above. For this to work, the strings `objects`, `etc`, and `thing` must all be valid :ref:`identifiers`. The ``42`` above can't be referenced this way, because `and more` is not a valid identifier.
 
 .. productionlist::
-    reference: `identifier` ("." `identifier`)*
+  reference: `identifier` ("." `identifier`)*
 
 When a reference is encountered in the model, it must be *resolved* to a specific object by searching for each identifier in turn. The starting point in this search is its *scope*, and in fact each reference typically has access to several nested scopes.
 
 For example, in YAML_, the following references `ref1` through `ref8` are strings interpreted as references according to their location in the model. References `ref1` through `ref4` search only the root scope, whereas references `ref5` through `ref8` have three scopes to search in order: `deeper`, `inside`, then lastly the root object::
 
-    ref1: name                # → "outer"
-    ref2: inside.name         # → "middle"
-    ref3: inside.deeper.name  # → "inner"
-    ref4: deeper.name         # → null
+  ref1: name                # → "outer"
+  ref2: inside.name         # → "middle"
+  ref3: inside.deeper.name  # → "inner"
+  ref4: deeper.name         # → null
 
-    name: outer
-    inside:
-      name: middle
-      deeper:
-        name: inner
+  name: outer
+  inside:
+    name: middle
+    deeper:
+      name: inner
 
-        ref5: name                # → "inner"
-        ref6: inside.name         # → "middle"
-        ref7: deeper.name         # → "inner"
-        ref8: inside.deeper.name  # → "inner"
+      ref5: name                # → "inner"
+      ref6: inside.name         # → "middle"
+      ref7: deeper.name         # → "inner"
+      ref8: inside.deeper.name  # → "inner"
 
 The consequences for an invalid reference depend on context. For example, :ref:`expressions` will not parse if any references within fail to resolve. Typically this will lead to a reported error as soon as that part of the model loads.
 
@@ -187,34 +187,34 @@ In short, identifiers are single words that don't start with a number or contain
 For a precise definition of what an Identifier means in Unicode_, Wiggleport follows in the footsteps of languages like C++11 and Swift with a simplified definition that doesn't require hefty character trait tables:
 
 .. productionlist::
-    identifier: `id_start` `id_continue`*
-    id_start: a-z | A-Z | "_" |
-            : U+00A8 | U+00AA | U+00AD | U+00AF |
-            : U+00B2–U+00B5 | U+00B7–U+00BA |
-            : U+00BC–U+00BE | U+00C0–U+00D6 |
-            : U+00D8–U+00F6 | U+00F8–U+00FF |
-            : U+0100–U+02FF | U+0370–U+167F |
-            : U+1681–U+180D | U+180F–U+1DBF |
-            : U+1E00–U+1FFF | U+200B–U+200D |
-            : U+202A–U+202E | U+203F–U+2040 | U+2054 |
-            : U+2060–U+206F | U+2070–U+20CF |
-            : U+2100–U+218F | U+2460–U+24FF |
-            : U+2776–U+2793 | U+2C00–U+2DFF |
-            : U+2E80–U+2FFF | U+3004–U+3007 |
-            : U+3021–U+302F | U+3031–U+303F |
-            : U+3040–U+D7FF | U+F900–U+FD3D |
-            : U+FD40–U+FDCF | U+FDF0–U+FE1F |
-            : U+FE30–U+FE44 | U+FE47–U+FFFD |
-            : U+10000–U+1FFFD | U+20000–U+2FFFD |
-            : U+30000–U+3FFFD | U+40000–U+4FFFD |
-            : U+50000–U+5FFFD | U+60000–U+6FFFD |
-            : U+70000–U+7FFFD | U+80000–U+8FFFD |
-            : U+90000–U+9FFFD | U+A0000–U+AFFFD |
-            : U+B0000–U+BFFFD | U+C0000–U+CFFFD |
-            : U+D0000–U+DFFFD | U+E0000–U+EFFFD
-    id_continue: `id_start` | 0-9 |
-               : U+0300–U+036F | U+1DC0–U+1DFF |
-               : U+20D0–U+20FF | U+FE20–U+FE2F
+  identifier: `id_start` `id_continue`*
+  id_start: a-z | A-Z | "_" |
+          : U+00A8 | U+00AA | U+00AD | U+00AF |
+          : U+00B2–U+00B5 | U+00B7–U+00BA |
+          : U+00BC–U+00BE | U+00C0–U+00D6 |
+          : U+00D8–U+00F6 | U+00F8–U+00FF |
+          : U+0100–U+02FF | U+0370–U+167F |
+          : U+1681–U+180D | U+180F–U+1DBF |
+          : U+1E00–U+1FFF | U+200B–U+200D |
+          : U+202A–U+202E | U+203F–U+2040 | U+2054 |
+          : U+2060–U+206F | U+2070–U+20CF |
+          : U+2100–U+218F | U+2460–U+24FF |
+          : U+2776–U+2793 | U+2C00–U+2DFF |
+          : U+2E80–U+2FFF | U+3004–U+3007 |
+          : U+3021–U+302F | U+3031–U+303F |
+          : U+3040–U+D7FF | U+F900–U+FD3D |
+          : U+FD40–U+FDCF | U+FDF0–U+FE1F |
+          : U+FE30–U+FE44 | U+FE47–U+FFFD |
+          : U+10000–U+1FFFD | U+20000–U+2FFFD |
+          : U+30000–U+3FFFD | U+40000–U+4FFFD |
+          : U+50000–U+5FFFD | U+60000–U+6FFFD |
+          : U+70000–U+7FFFD | U+80000–U+8FFFD |
+          : U+90000–U+9FFFD | U+A0000–U+AFFFD |
+          : U+B0000–U+BFFFD | U+C0000–U+CFFFD |
+          : U+D0000–U+DFFFD | U+E0000–U+EFFFD
+  id_continue: `id_start` | 0-9 |
+             : U+0300–U+036F | U+1DC0–U+1DFF |
+             : U+20D0–U+20FF | U+FE20–U+FE2F
 
 Not valid identifiers::
 
@@ -271,12 +271,95 @@ That got abstract fast, but here's an example. This is a YAML_ object modeling a
 
   baud: clock.rate / divisor :~ 19200
 
+To understand expressions in detail, the following sections will describe in detail the different terms allowed within an expression string.
+
+.. productionlist::
+  expression: `reference` | `number` | `variable` | `enclosure`
+  enclosure: "(" `expression` ")" |
+           : `unary_operator` `expression` |
+           : `expression` `binary_operator` `expression` |
+
+
+.. _expr-values:
+
+Values
+------
+
+Every expression and subexpression can be evaluated to a number. Just like with JSON_ :ref:`numbers`, the internal storage can be either 64-bit signed integer or 64-bit `IEEE double`_ precision floating point. Promotion from integer to floating point happens automatically as needed during arithmetic operations.
+
+.. _expr-constants:
 
 Constants
----------
+^^^^^^^^^
+
+.. highlight:: yaml
+
+.. productionlist::
+  number: `decimal_integer` | `hex_integer` |
+        : `octal_integer` | `binary_integer` |
+        : `real_number`
+
+The simplest expression is a *constant*, serving the same function as plain JSON :ref:`numbers`. These values can be relied on to never change unless that part of the model is reloaded. Numeric constants in an expression may use decimal, hexadecimal, octal, binary, or floating point notations.
+
+.. productionlist::
+  digit_separator: "_"?
+
+In numeric constants, underscore characters may be used to visually separate digits.
+
+.. productionlist::
+  negative_prefix: "-"?
+  decimal_integer: `negative_prefix` 1-9 ( `digit_separator` 0-9 )*
+
+Examples::
+
+  42
+  -100_000
+  1_2_300
+
+.. productionlist::
+  hex_prefix: "0x" | "0X"
+  hex_digit: 0-9 | a-f | A-F
+  hex_integer: `negative_prefix` `hex_prefix` `hex_digit` ( `digit_separator` `hex_digit` )*
+
+Examples::
+
+  0x4a42_0D9C_9944abcd
+  0X4
+  -0x2000
+
+.. productionlist::
+  octal_integer: `negative_prefix` "0" ( `digit_separator` 0-7 )*
+
+Examples::
+
+  0
+  0477
+  -010
+
+.. productionlist::
+  binary_prefix: "0b" | "0B"
+  binary_integer: `negative_prefix` `binary_prefix` 0-1 ( `digit_separator` 0-1 )*
+
+Examples::
+
+  0b01010101
+  -0B100
+  0b1101_0111_10000000_11111110
+
+
+.. _expr-variables:
+
+Variables
+^^^^^^^^^
+
+
+
+
 
 References
 ----------
+
+
 
 Arithmetic Operators
 --------------------
