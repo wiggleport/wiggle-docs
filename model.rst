@@ -278,6 +278,7 @@ To understand expressions in detail, the following sections will describe in det
   enclosure: "(" `expression` ")" |
            : `unary_operator` `expression` |
            : `expression` `binary_operator` `expression` |
+           : `expression` "?" `expression` ":" `expression`
 
 Every expression and subexpression can be evaluated to a number. Just like with JSON_ :ref:`numbers`, the internal storage can be either 64-bit signed integer or 64-bit `IEEE double`_ precision floating point. Promotion from integer to floating point happens as needed during arithmetic operations.
 
@@ -402,14 +403,15 @@ Example constants and references, in a YAML_ object::
 Arithmetic Operators
 --------------------
 
-Expressions can be new values computed from multiple existing values, using many of the same unary and binary operators you may know from other programming languages.
+Expressions can be new values computed from multiple existing values, using many of the same unary and binary operators you may know from other programming languages. Each of these expressions sets up a *data flow*, where changes to the inputs will automatically cause an observable change in the expression's result.
 
 +------------+------------------------+------------------+-------------------+-----------------+
-| Precedence | Operator               | Description      | Operand Type(s)   | Result Type     |
+| Precedence | Description            | Operator         | Operand Type(s)   | Result Type     |
 +============+========================+==================+===================+=================+
 | 1          | Negate                 | `-a`             | Integer / Real    | Integer / Real  |
 +------------+------------------------+------------------+-------------------+-----------------+
 |            | Bitwise Complement     | `~a`             | Integer           | Integer         |
+|            | [#cpl]_                |                  |                   |                 |
 +------------+------------------------+------------------+-------------------+-----------------+
 |            | Logical Inverse        | `!a`             | Integer / Real    | 0 or 1          |
 +------------+------------------------+------------------+-------------------+-----------------+
@@ -421,9 +423,9 @@ Expressions can be new values computed from multiple existing values, using many
 +------------+------------------------+------------------+-------------------+-----------------+
 |            | Integer Divide         | `a // b`         | Integers / Reals  | Integer         |
 +------------+------------------------+------------------+-------------------+-----------------+
-|            | Modulo                 | `a % b`          | Integers / Reals  | Integer / Real  |
+|            | Modulo [#mod]_         | `a % b`          | Integers / Reals  | Integer / Real  |
 +------------+------------------------+------------------+-------------------+-----------------+
-|            | Divisor Modulo         | `a %% b`         | Integers / Reals  | Integer / Real  |
+|            | Divisor Modulo [#rem]_ | `a %% b`         | Integers / Reals  | Integer / Real  |
 +------------+------------------------+------------------+-------------------+-----------------+
 | 4          | Add                    | `a + b`          | Integers / Reals  | Integer / Real  |
 +------------+------------------------+------------------+-------------------+-----------------+
@@ -455,23 +457,53 @@ Expressions can be new values computed from multiple existing values, using many
 +------------+------------------------+------------------+-------------------+-----------------+
 | 12         | Logical OR             | `a || b`         | Integers          | 0 or 1          |
 +------------+------------------------+------------------+-------------------+-----------------+
-| 13         | Conditional            | `a ? b : c`      | Integers / Reals  | Integer / Real  |
+| 13         | Conditional [#cond]_   | `a ? b : c`      | Integers / Reals  | Integer / Real  |
 +------------+------------------------+------------------+-------------------+-----------------+
-| 14         | Comma                  | `a, b`           | Integers / Reals  | Integer / Real  |
+| 14         | Comma [#comma]_        | `a, b`           | Integers / Reals  | Integer / Real  |
 +------------+------------------------+------------------+-------------------+-----------------+
+
+.. [#cpl] Bitwise complement `~a` is equivalent to `a ^ 0xFFFF_FFFF_FFFF_FFFF`.
+.. [#mod] The result in Modulo takes the sign of `a`.
+.. [#rem] The result in Divisor Modulo takes the sign of `b`.
+.. [#cond] The ternary_ conditional `a ? b : c` evaluates `a`, choosing to return `b` if nonzero and `c` if zero.
+.. [#comma] The comma operator `a, b` evaluates both expressions, but keeps only value `b`. The expression `a` may still contribute by including expression references or constraints.
 
 
 .. _constraint-opers:
 
-Constraint Operator
+Constraint Operators
 --------------------
+
+Wiggleport uses a system of *constraints* for modeling the relationship between hardware capabilities and requirements. Operators and keywords beginning with a colon (`:`) are related to constraints.
+
+The constraint solver might support new basic types in the future, but right now we're focused on hardware with discrete configuration states. Our basic *variable* type is an integer:
 
 .. productionlist::
   variable: ":int"
 
-Expressions support variables that take on any integer value. These are represented by the symbol `:int`, indicating a constraint variable with integer type. Other types may be introduced later.
+Variables have no default value and no specific range of valid values. Potential and current values for each variable will be determined based on the network of expressions attached to that variable. All of the :ref:`arithmetic-opers` work on variables, as well as a new category of constraint operators:
 
-Variables have no default value and no specific range of valid values. Potential and current values for each variable will be determined based on the network of expressions attached to that variable.
++------------+------------------------------------+---------------+----------------------+--------+
+| Precedence | Description                        | Operator      | Operand Type(s)      | Value  |
++============+====================================+===============+======================+========+
+| 15         | Constrain to Less Than             | `a :< b`      | Ints / Reals / Vars  | `a`    |
++------------+------------------------------------+---------------+----------------------+--------+
+|            | Constrain to Less Than or Equal    | `a :<= b`     | Ints / Reals / Vars  | `a`    |
++------------+------------------------------------+---------------+----------------------+--------+
+|            | Constrain to Greater Than          | `a :> b`      | Ints / Reals / Vars  | `a`    |
++------------+------------------------------------+---------------+----------------------+--------+
+|            | Constrain to Greater Than or Equal | `a :>= b`     | Ints / Reals / Vars  | `a`    |
++------------+------------------------------------+---------------+----------------------+--------+
+|            | Constrain to Equality              | `a := b`      | Ints / Reals / Vars  | `a`    |
++------------+------------------------------------+---------------+----------------------+--------+
+|            | Weak Equality Constraint [#weak]_  | `a :~ b`      | Ints / Reals / Vars  | `a`    |
++------------+------------------------------------+---------------+----------------------+--------+
+
+.. [#weak] Weak constraints do not require exact equality, and they will yield to a strong equality constraint or a conflicting inequality. The weak constraint operator is useful for specifying a default or nominal value.
+
+Examples::
+
+  # Yea, lets have some
 
 
 Stream Objects
@@ -493,6 +525,7 @@ Pattern Streams
 
 State machines, yo.
 
+.. _ternary: https://en.wikipedia.org/wiki/Ternary_operation
 .. _baud: https://en.wikipedia.org/wiki/Baud
 .. _IEEE double: https://en.wikipedia.org/wiki/Double-precision_floating-point_format
 .. _JSON: http://json.org

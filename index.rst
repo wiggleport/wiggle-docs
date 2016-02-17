@@ -13,7 +13,7 @@ Welcome to the documentation for using and extending Wiggleport_.
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 4
 
    model
    api
