@@ -501,6 +501,10 @@ Variables have no default value and no specific range of valid values. Potential
 
 .. [#weak] Weak constraints do not require exact equality, and they will yield to a strong equality constraint or a conflicting inequality. The weak constraint operator is useful for specifying a default or nominal value.
 
+Conflicts in strong constraints are disallowed entirely. If a model can't meet all constraints, it will be unable to load. Changes will be prohibited if they violate any constraints irreconcilably.
+
+If multiple weak constraints apply to the same variable, they will be prioritized by their distance from this variable in the expression graph. Weak constraints farther from a variable can override weak constraints closer to the same variable.
+
 Examples::
 
   # Yea, lets have some
