@@ -10,7 +10,9 @@ Welcome to the documentation for using and extending Wiggleport_.
 
 **Coming soon** – these documents are a work in progress.
 
-Contents:
+.. hlist::
+   * :ref:`genindex`
+   * Table of Contents:
 
 .. toctree::
    :maxdepth: 2
@@ -31,8 +33,6 @@ Contents:
    wigglemod
    logic
    packages
-
-* :ref:`genindex`
 
 .. image:: /images/wiggle-spine.*
    :width: 75%
