@@ -1,18 +1,13 @@
 .. default-role:: literal
-.. _hardware-model:
 
-The Hardware Model
-==================
+.. _json-models:
+
+JSON Models
+===========
 
 At it's very core, Wiggleport is based on a way of interacting with hardware by *modeling* the way data flows. These models contain anything the computer needs to know about some hardware in order to communicate with it, including how to configure any programmable parts of that hardware. Wiggleport's modularity comes from the way these models can be freely reassembled without rewriting driver software.
 
 Like the Document Object Model you may be familiar with from web browsers, Wiggleport has a hardware model based on a tree-structured collection of objects. Whereas the web was born from the fairly complex standard that became XML, Wiggleport starts with something simpler: JSON_.
-
-
-.. _modeling-with-json:
-
-Modeling with JSON
-==================
 
 JSON_ itself is designed to be very simple and unambiguous for software to parse, but it can be inconvenient to read and write by hand. In describing hardware models, we will often use YAML_ as an alternate syntax for these same objects.
 
@@ -234,8 +229,8 @@ Valid identifiers::
 
 .. _expressions:
 
-Expressions
-===========
+Expression Syntax
+=================
 
 .. highlight:: yaml
 
