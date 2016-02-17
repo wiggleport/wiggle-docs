@@ -12,3 +12,6 @@ If you'd like to build the docs yourself, you will need [Sphinx](http://www.sphi
     sudo pip install sphinx sphinx_rtd_theme
 
 Run `make` to get started.
+
+* **Note**: Currently only the HTML (html / htmldir) formats are maintained.
+* Other outputs may work, but the formatting won't be quite right.
