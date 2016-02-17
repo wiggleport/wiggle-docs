@@ -34,7 +34,7 @@ Contents:
 
 * :ref:`genindex`
 
-.. image:: /images/wiggle-spine.png
+.. image:: /images/wiggle-spine.*
    :width: 75%
    :alt: Wiggle Spine sketch
    :align: center

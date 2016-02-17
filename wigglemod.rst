@@ -2,4 +2,6 @@
 Module Connector
 ================
 
-The Wiggle Spine has 7 connectors that each supply power and data to one module.
+.. image:: /images/wigglemod-spec.*
+   :width: 100%
+   :alt: Wigglemod Pinout Diagram
