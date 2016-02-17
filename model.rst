@@ -279,18 +279,13 @@ To understand expressions in detail, the following sections will describe in det
            : `unary_operator` `expression` |
            : `expression` `binary_operator` `expression` |
 
+Every expression and subexpression can be evaluated to a number. Just like with JSON_ :ref:`numbers`, the internal storage can be either 64-bit signed integer or 64-bit `IEEE double`_ precision floating point. Promotion from integer to floating point happens as needed during arithmetic operations.
 
-.. _expr-values:
 
-Values
-------
+.. _constant-values:
 
-Every expression and subexpression can be evaluated to a number. Just like with JSON_ :ref:`numbers`, the internal storage can be either 64-bit signed integer or 64-bit `IEEE double`_ precision floating point. Promotion from integer to floating point happens automatically as needed during arithmetic operations.
-
-.. _expr-constants:
-
-Constants
-^^^^^^^^^
+Constant Values
+---------------
 
 .. highlight:: yaml
 
@@ -299,7 +294,7 @@ Constants
         : `octal_integer` | `binary_integer` |
         : `real_number`
 
-The simplest expression is a *constant*, serving the same function as plain JSON :ref:`numbers`. These values can be relied on to never change unless that part of the model is reloaded. Numeric constants in an expression may use decimal, hexadecimal, octal, binary, or floating point notations.
+The simplest expression is a *constant*, serving the same function as plain JSON :ref:`numbers`. These values can be relied on to never change unless that part of the model is reloaded. Each numeric constant in an expression may use decimal, hexadecimal, octal, binary, or floating point notations.
 
 .. productionlist::
   digit_separator: "_"?
@@ -346,27 +341,68 @@ Examples::
   -0B100
   0b1101_0111_10000000_11111110
 
+.. productionlist::
+  exponent_prefix: "e" | "E"
+  sign: "+" | "-"
+  digits: 0-9 ( `digit_separator` 0-9 )*
+  real_exponent: `exponent_prefix` `sign`? `digits`
+  real_mantissa: `negative_prefix` `digits`? "." `digits` |
+               : `negative_prefix` `digits` "."
+  real_number: `real_mantissa` `real_exponent`? |
+             : `decimal_integer` `real_exponent`
 
-.. _expr-variables:
+Examples::
 
-Variables
-^^^^^^^^^
-
-
-
-
-
-References
-----------
+  10.
+  .5
+  0.550_291
+  100_421.5
+  1e200
+  5.2e1_5
 
 
+.. _expression-refs:
+
+Expression References
+---------------------
+
+When the expression parser encounters something that looks like a :token:`reference`, it will immediately resolve that reference to a specific JSON_ object in the model. After this point, the reference remains intact as long as both involved expressions are loaded into the model.
+
+If the reference cannot be resolved, or it resolves to something other than a number or a valid expression string, this will cause an error immediately.
+
+.. highlight:: yaml
+
+Example constants and references, in a YAML_ object::
+
+  sample_constants:
+    the_answer: 42
+    hex_thing: 0x4C00_9230
+    physics:
+      speed_of_light: 2.99792e8
+
+  sample_refs:
+    also_the_answer: sample_constants.the_answer
+    still_the_same_answer: also_the_answer
+    my_speed: sample_constants.physics.speed_of_light
+
+
+.. _arithmetic-opers:
 
 Arithmetic Operators
 --------------------
 
+
+.. _constraint-opers:
+
 Constraint Operators
 --------------------
 
+.. productionlist::
+  variable: ":int"
+
+Expressions support variables that take on any integer value. These are represented by the symbol `:int`, indicating a constraint variable with integer type. Other types may be introduced later.
+
+Variables have no default value and no specific range of valid values. Potential and current values for each variable will be determined based on the network of expressions attached to that variable.
 
 
 Stream Objects
