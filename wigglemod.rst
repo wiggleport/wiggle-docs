@@ -3,9 +3,14 @@
    :width: 100%
    :alt: Wigglemod Spec Diagram
 
+.. _wigglemod:
+
 ================
 Module Connector
 ================
+
+Talk about the connector itself- 0.1" header etc.
+
 
 .. _pinout-table:
 
