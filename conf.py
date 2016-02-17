@@ -18,6 +18,8 @@ import os
 # Python extensions relative to the current directory
 sys.path.insert(0, os.path.abspath('_extensions'))
 
+print sys.path
+
 # -- General configuration ------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
@@ -27,7 +29,7 @@ sys.path.insert(0, os.path.abspath('_extensions'))
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-	'sphinxcontrib.inlinesyntaxhighlight',
+	'inlinesyntaxhighlight',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
