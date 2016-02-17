@@ -375,15 +375,26 @@ If the reference cannot be resolved, or it resolves to something other than a nu
 Example constants and references, in a YAML_ object::
 
   sample_constants:
+    just_a_string: This will not be parsed as an expression
+
     the_answer: 42
-    hex_thing: 0x4C00_9230
     physics:
       speed_of_light: 2.99792e8
 
   sample_refs:
-    also_the_answer: sample_constants.the_answer
-    still_the_same_answer: also_the_answer
+    # References can be arbitrarily deep, so long as the
+    # final target is a number or expression.
+
     my_speed: sample_constants.physics.speed_of_light
+
+    # This is parsed as an expression if and only if
+    # "still_the_same_answer" below is an expression.
+
+    also_the_answer: sample_constants.the_answer
+
+    # This will evaluate to a constant "42"
+
+    still_the_same_answer: also_the_answer
 
 
 .. _arithmetic-opers:
@@ -391,10 +402,68 @@ Example constants and references, in a YAML_ object::
 Arithmetic Operators
 --------------------
 
+Expressions can be new values computed from multiple existing values, using many of the same unary and binary operators you may know from other programming languages.
+
++------------+------------------------+------------------+-------------------+-----------------+
+| Precedence | Operator               | Description      | Operand Type(s)   | Result Type     |
++============+========================+==================+===================+=================+
+| 1          | Negate                 | `-a`             | Integer / Real    | Integer / Real  |
++------------+------------------------+------------------+-------------------+-----------------+
+|            | Bitwise Complement     | `~a`             | Integer           | Integer         |
++------------+------------------------+------------------+-------------------+-----------------+
+|            | Logical Inverse        | `!a`             | Integer / Real    | 0 or 1          |
++------------+------------------------+------------------+-------------------+-----------------+
+| 2          | Exponentiate           | `a ** b`         | Integers / Reals  | Integer / Real  |
++------------+------------------------+------------------+-------------------+-----------------+
+| 3          | Multiply               | `a * b`          | Integers / Reals  | Integer / Real  |
++------------+------------------------+------------------+-------------------+-----------------+
+|            | Divide                 | `a / b`          | Integers / Reals  | Real            |
++------------+------------------------+------------------+-------------------+-----------------+
+|            | Integer Divide         | `a // b`         | Integers / Reals  | Integer         |
++------------+------------------------+------------------+-------------------+-----------------+
+|            | Modulo                 | `a % b`          | Integers / Reals  | Integer / Real  |
++------------+------------------------+------------------+-------------------+-----------------+
+|            | Divisor Modulo         | `a %% b`         | Integers / Reals  | Integer / Real  |
++------------+------------------------+------------------+-------------------+-----------------+
+| 4          | Add                    | `a + b`          | Integers / Reals  | Integer / Real  |
++------------+------------------------+------------------+-------------------+-----------------+
+|            | Subtract               | `a - b`          | Integers / Reals  | Integer / Real  |
++------------+------------------------+------------------+-------------------+-----------------+
+| 5          | Left Shift             | `a << b`         | Integers          | Integer         |
++------------+------------------------+------------------+-------------------+-----------------+
+|            | Right Shift            | `a >> b`         | Integers          | Integer         |
++------------+------------------------+------------------+-------------------+-----------------+
+| 6          | Less Than              | `a < b`          | Integers / Reals  | 0 or 1          |
++------------+------------------------+------------------+-------------------+-----------------+
+|            | Less Than or Equal     | `a <= b`         | Integers / Reals  | 0 or 1          |
++------------+------------------------+------------------+-------------------+-----------------+
+|            | Greater Than           | `a > b`          | Integers / Reals  | 0 or 1          |
++------------+------------------------+------------------+-------------------+-----------------+
+|            | Greater Than or Equal  | `a >= b`         | Integers / Reals  | 0 or 1          |
++------------+------------------------+------------------+-------------------+-----------------+
+| 7          | Equality Test          | `a == b`         | Integers / Reals  | 0 or 1          |
++------------+------------------------+------------------+-------------------+-----------------+
+|            | Inequality Test        | `a != b`         | Integers / Reals  | 0 or 1          |
++------------+------------------------+------------------+-------------------+-----------------+
+| 8          | Bitwise AND            | `a & b`          | Integers          | Integer         |
++------------+------------------------+------------------+-------------------+-----------------+
+| 9          | Bitwise XOR            | `a ^ b`          | Integers          | Integer         |
++------------+------------------------+------------------+-------------------+-----------------+
+| 10         | Bitwise OR             | `a | b`          | Integers          | Integer         |
++------------+------------------------+------------------+-------------------+-----------------+
+| 11         | Logical AND            | `a && b`         | Integers          | 0 or 1          |
++------------+------------------------+------------------+-------------------+-----------------+
+| 12         | Logical OR             | `a || b`         | Integers          | 0 or 1          |
++------------+------------------------+------------------+-------------------+-----------------+
+| 13         | Conditional            | `a ? b : c`      | Integers / Reals  | Integer / Real  |
++------------+------------------------+------------------+-------------------+-----------------+
+| 14         | Comma                  | `a, b`           | Integers / Reals  | Integer / Real  |
++------------+------------------------+------------------+-------------------+-----------------+
+
 
 .. _constraint-opers:
 
-Constraint Operators
+Constraint Operator
 --------------------
 
 .. productionlist::
