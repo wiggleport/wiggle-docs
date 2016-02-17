@@ -36,6 +36,14 @@ Ground              9     10    Ground
 .. [#pgnd] The 5-24V power supply has a separate ground return available, in order to reduce noise currents through the main digital ground.
 
 
+.. _pmod-compat:
+
+PMOD Compatibility
+------------------
+
+Let's talk pmods, mkay!
+
+
 .. _electrical-characteristics:
 
 Electrical Characteristics
@@ -53,10 +61,10 @@ Electrical Characteristics
 | V\ :subscript:`IN`          | Input voltage applied       | -0.5                        |                             | 3.60                        | V     |
 +-----------------------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+-------+
 | V\ :subscript:`HBM`         | ESD Tolerance               |                             | >2                          |                             | kV    |
-|                             | (Human Body Model)          |                             |                             |                             |       |
+|                             | (Human Body)                |                             |                             |                             |       |
 +-----------------------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+-------+
 | V\ :subscript:`CDM`         | ESD Tolerance               |                             | >1                          |                             | kV    |
-|                             | (Charged Device Model)      |                             |                             |                             |       |
+|                             | (Charged Device)            |                             |                             |                             |       |
 +-----------------------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+-------+
 | V\ :subscript:`IL`          | Input low level             | -0.3                        |                             | 0.8                         | V     |
 +-----------------------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+-------+
