@@ -13,11 +13,24 @@ Welcome to the documentation for using and extending Wiggleport_.
 Contents:
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 2
+   :caption: Model Reference
 
    model
-   api
-   extending
+
+.. toctree::
+   :maxdepth: 2
+   :caption: API Reference
+
+   api/c
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Extending Wiggleport
+
+   wigglemod
+   logic
+   packages
 
 * :ref:`genindex`
 
