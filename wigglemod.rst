@@ -9,7 +9,38 @@
 Module Connector
 ================
 
-Talk about the connector itself- 0.1" header etc.
+.. figure:: /images/68021-220HLF.*
+   :figwidth: 35 %
+   :alt: Photo of Amphenol 68021-220HLF
+   :align: right
+
+   A 2x10 right angle 2.54mm header, the Amphenol 68021-220HLF.
+   Gold plated even!
+
+Each module connector is a right angle **dual-row** female header, with **20 contacts** on 2.54mm / 0.1" centers. These headers are compatible with common prototyping jumpers, and they're available from many sources in both surface-mount and through-hole varieties.
+
+Sample mating connectors for use in modules:
+
++--------------------------+------------------------------+
+| Product                  | Distributor                  |
++==========================+==============================+
+| Amphenol 68021-220HLF    | `Digi-Key 609-3347-ND`_      |
+|                          +------------------------------+
+|                          | `Mouser 649-68021-220HLF`_   |
++--------------------------+------------------------------+
+| Molex 71764-0120         | `Mouser 538-71764-0120`_     |
++--------------------------+------------------------------+
+
+.. _Digi-Key 609-3347-ND: http://www.digikey.com/product-detail/en/68021-220HLF/609-3347-ND/1878576
+.. _Mouser 649-68021-220HLF: http://www.mouser.com/ProductDetail/FCI/68021-220HLF/
+.. _Mouser 538-71764-0120: http://www.mouser.com/ProductDetail/Molex/71764-0120/
+
+.. figure:: /images/centronic-230-XX.*
+   :width: 80 %
+   :alt: Mechanical drawing for the Centronic 230-20
+   :align: center
+
+   Mechanical drawing for the female headers used on the Wiggle Spine board.
 
 
 .. _pinout-table:
