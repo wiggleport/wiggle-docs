@@ -14,13 +14,24 @@ With *expressions*, the hardware model can represent a graph of related values a
 
 Expressions are :ref:`strings` formatted according to a mini-language that can use :ref:`references` to link with expressions and values elsewhere in the model.
 
-Much of the syntax below will seem familiar from other programming languages. Wiggleport expressions adopt a new lexical convention in which operators beginning with a colon (`:`) indicate constraints rather than boolean evaluation.
+.. productionlist::
+  expression: `reference` | `number` | `variable` | `enclosure`
+  enclosure: "(" `expression` ")" |
+           : `unary_operator` `expression` |
+           : `expression` `binary_operator` `expression` |
+           : `expression` "?" `expression` ":" `expression`
+
+Every expression and subexpression can be evaluated to a number. Just like with JSON_ :ref:`numbers`, the internal storage can be either 64-bit signed integer or 64-bit `IEEE double`_ precision floating point. Promotion from integer to floating point happens as needed during arithmetic operations.
 
 
 Life Cycle
 ==========
 
-When an expression loads, that expression will resolve to a number right away, but that number may change at any time. As long as the expression is loaded, it has the ability to both observe and influence the other values it's linked to.
+After an expression loads, it resolves to a number right away. That number may change at any time, and the expression's instantiator will be notified of the new value. As long as the expression is loaded, it has the ability to both observe and influence the other values it's linked to.
+
+Expressions in the model remain loaded as long as their corresponding portion of the model, typically rooted in some physical hardware that we can detect being plugged and unplugged.
+
+In addition, temporary expressions may be created and destroyed explicitly using the API. Temporary constraints can be thought of as requests at runtime to reconfigure the hardware in a particular way.
 
 
 Examples
@@ -46,17 +57,6 @@ That got abstract fast, but here's an example. This is a YAML_ object modeling a
   # to approximate 19200 baud.
 
   baud: clock.rate / divisor :~ 19200
-
-To understand expressions in detail, the following sections will describe in detail the different terms allowed within an expression string.
-
-.. productionlist::
-  expression: `reference` | `number` | `variable` | `enclosure`
-  enclosure: "(" `expression` ")" |
-           : `unary_operator` `expression` |
-           : `expression` `binary_operator` `expression` |
-           : `expression` "?" `expression` ":" `expression`
-
-Every expression and subexpression can be evaluated to a number. Just like with JSON_ :ref:`numbers`, the internal storage can be either 64-bit signed integer or 64-bit `IEEE double`_ precision floating point. Promotion from integer to floating point happens as needed during arithmetic operations.
 
 
 .. _expression-constants:
