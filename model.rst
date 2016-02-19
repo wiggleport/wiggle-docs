@@ -235,22 +235,22 @@ Constructors
 
 .. highlight:: yaml
 
-On their own, the numbers and strings in a hardware model are just lifeless data. Even expression strings don't come to life until, by reference, we find out that they must be interpreted as expressions. In :ref:`json-models` we have a convention that data only becomes *live* in ways explained by object members beginning with a `@` symbol, known as *constructors*:
+On their own, the numbers and strings in a hardware model are just lifeless data. Even expression strings don't come to life until, by reference, we find out that they must be interpreted as expressions. In :ref:`json-models` we have a convention: data only become *live* in ways explained by object members known as *constructors*. You can identify a constructor by it's `@` prefix:
 
 .. productionlist::
   constructor: "@" `id_continue`+
 
-As soon as a constructor becomes part of the model, it has an immediate effect, based on the constructor's name and the object's other members. If an unrecognized constructor loads, it will immediately cause an error.
+As soon as a constructor becomes part of the model, it has an immediate effect, based on the constructor's name and the object's other members. If an unrecognized constructor tries to load, this will immediately cause an error.
 
-Constructors are used for making :ref:`stream-objects`, and for linking together :ref:`json-packages`. These constructed objects are discussed in detail in their own sections.
+Constructors are used for making :ref:`stream-objects`, and for linking together :ref:`json-packages`. These live objects are described in detail by their own sections:
 
 ============== ================================================== ============================
 Constructor    Description                                        Section
 ============== ================================================== ============================
-`@class`       Attachment point for other JSON objects            :ref:`json-packages`
-`@driver`      Attachment point for I/O drivers                   :ref:`io-drivers`
-`@buffer`      Buffered stream object                             :ref:`stream-objects`
-`@pattern`     Patterned stream object                            :ref:`stream-objects`
+**@class**     Attachment point for other JSON objects            :ref:`json-packages`
+**@driver**    Attachment point for I/O drivers                   :ref:`io-drivers`
+**@buffer**    Buffered stream object                             :ref:`stream-objects`
+**@pattern**   Patterned stream object                            :ref:`stream-objects`
 ============== ================================================== ============================
 
 
