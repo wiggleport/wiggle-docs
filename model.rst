@@ -240,18 +240,18 @@ On their own, the numbers and strings in a hardware model are just lifeless data
 .. productionlist::
   constructor: "@" `id_continue`+
 
-As soon as a constructor becomes part of the model, it has an immediate effect, based on the constructor's name and the object's other members. If an unrecognized constructor tries to load, this will immediately cause an error.
-
 Constructors are used for making :ref:`stream-objects`, and for linking together :ref:`json-packages`. These live objects are described in detail by their own sections:
 
 ============== ================================================== ============================
 Constructor    Description                                        Section
 ============== ================================================== ============================
-**@class**     Attachment point for other JSON objects            :ref:`json-packages`
-**@driver**    Attachment point for I/O drivers                   :ref:`json-packages`
-**@buffer**    Buffered stream object                             :ref:`stream-objects`
-**@pattern**   Patterned stream object                            :ref:`stream-objects`
+**@class**     Attachment point for other JSON objects            :ref:`class-attachment`
+**@driver**    Attachment point for I/O drivers                   :ref:`io-drivers`
+**@buffer**    Buffered stream object                             :ref:`buffer-streams`
+**@pattern**   Patterned stream object                            :ref:`pattern-streams`
 ============== ================================================== ============================
+
+As soon as a constructor becomes part of the model, it has an immediate effect, based on the constructor's name and the object's other members. If an unrecognized constructor tries to load, this will immediately cause an error.
 
 
 .. _IEEE double: https://en.wikipedia.org/wiki/Double-precision_floating-point_format
