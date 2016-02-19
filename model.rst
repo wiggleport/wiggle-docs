@@ -2,6 +2,7 @@
 
 .. _json-models:
 
+===========
 JSON Models
 ===========
 
@@ -15,7 +16,7 @@ JSON_ itself is designed to be very simple and unambiguous for software to parse
 .. _numbers:
 
 Numbers
--------
+=======
 
 .. highlight:: json
 
@@ -29,7 +30,7 @@ In modeling hardware, it's often helpful to use hexadecimal_ numbers. JSON does 
 .. _strings:
 
 Strings
--------
+=======
 
 Strings of Unicode_ characters can take on a variety of roles in Wiggleport's hardware models. On its own, a string has no implied format. It can represent freeform metadata like a device's name or its version. :ref:`expressions` use specially formatted strings to represent rules for values that can change.
 
@@ -39,7 +40,7 @@ In JSON_, all strings must be surrounded with double-quotes. Much of YAML_'s rea
 .. _special-values:
 
 Special Values
---------------
+==============
 
 .. highlight:: json
 
@@ -56,7 +57,7 @@ YAML_ lets you document your models using comment lines beginning with ``#``.
 .. _arrays:
 
 Arrays
-------
+======
 
 .. highlight:: yaml
 
@@ -85,7 +86,7 @@ The equivalent JSON_ for this example would be::
 .. _objects:
 
 Objects
--------
+=======
 
 .. highlight:: json
 
@@ -137,7 +138,7 @@ The same object could be represented in JSON_ somewhat more verbosely as::
 .. _references:
 
 References
-----------
+==========
 
 .. highlight:: yaml
 
@@ -172,7 +173,7 @@ The consequences for an invalid reference depend on context. For example, :ref:`
 .. _identifiers:
 
 Identifiers
------------
+===========
 
 .. highlight:: yaml
 
@@ -229,6 +230,7 @@ Valid identifiers::
 
 .. _expressions:
 
+=================
 Expression Syntax
 =================
 
@@ -280,7 +282,7 @@ Every expression and subexpression can be evaluated to a number. Just like with 
 .. _constant-values:
 
 Constant Values
----------------
+===============
 
 .. highlight:: yaml
 
@@ -359,7 +361,7 @@ Examples::
 .. _expression-refs:
 
 Expression References
----------------------
+=====================
 
 When the expression parser encounters something that looks like a :token:`reference`, it will immediately resolve that reference to a specific JSON_ object in the model. After this point, the reference remains intact as long as both involved expressions are loaded into the model.
 
@@ -395,7 +397,7 @@ Example constants and references, in a YAML_ object::
 .. _arithmetic-opers:
 
 Arithmetic Operators
---------------------
+====================
 
 Expressions can be new values computed from multiple existing values, using many of the same unary and binary operators you may know from other programming languages. Each of these expressions sets up a *data flow*, where changes to the inputs will automatically cause an observable change in the expression's result.
 
@@ -466,7 +468,7 @@ Expressions can be new values computed from multiple existing values, using many
 .. _constraint-opers:
 
 Constraint Operators
---------------------
+====================
 
 Wiggleport uses a system of *constraints* for modeling the relationship between hardware capabilities and requirements. Operators and keywords beginning with a colon (`:`) are related to constraints.
 
@@ -504,6 +506,7 @@ Examples::
   # Yea, lets have some
 
 
+==============
 Stream Objects
 ==============
 
@@ -513,13 +516,13 @@ In the abstract, a stream is an interface for flowing data. Data come packaged a
 
 
 Buffer Streams
---------------
+==============
 
 A thing made of memory! Shared memory even.
 
 
 Pattern Streams
----------------
+===============
 
 State machines, yo.
 

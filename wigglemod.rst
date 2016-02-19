@@ -46,11 +46,11 @@ Sample mating connectors for use in modules:
 .. _pinout-table:
 
 Pinout Table
-------------
+============
 
 The pin numbering alternates between rows, starting with pin 1 identified using both a printed arrow and a square solder pad.
 
-=================== ===== ===== ===================
+------------------- ----- ----- -------------------
 Function →          Pin   Pin   ← Function
 =================== ===== ===== ===================
 GPIO [#gpio]_       1     2     GPIO
@@ -63,7 +63,7 @@ Ground              9     10    Ground
 5-24V (-) [#pgnd]_  15    16    5-24V (-)
 5-24V (-)           17    18    5-24V (+)
 5-24V (+)           19    20    5-24V (+)
-=================== ===== ===== ===================
+------------------- ----- ----- -------------------
 
 .. [#gpio] All General Purpose I/O pins are 3.3V LVCMOS compatible. Inputs are not 5V tolerant!
 
@@ -75,7 +75,7 @@ Ground              9     10    Ground
 .. _pmod-compat:
 
 PMOD Compatibility
-------------------
+==================
 
 Let's talk pmods, mkay!
 
@@ -83,7 +83,7 @@ Let's talk pmods, mkay!
 .. _electrical-characteristics:
 
 Electrical Characteristics
---------------------------
+==========================
 
 +-----------------------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+-------+
 | Symbol                      | Parameter Description       | Minimum                     | Typical                     | Maximum                     | Units |
@@ -128,7 +128,7 @@ Electrical Characteristics
 .. _mechanical-characteristics:
 
 Mechanical Characteristics
---------------------------
+==========================
 
 Bloop!
 

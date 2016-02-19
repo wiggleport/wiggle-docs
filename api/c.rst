@@ -1,14 +1,14 @@
 .. _c-api:
 
-*************
+=============
 C/C++ Library
-*************
+=============
 
 The native interface to libwiggleport is C-callable, and therefore it's directly usable with C or C++ as well as many higher level languages that include a Foreign Function Interface library.
 
 
 Connecting to Wiggleport
-------------------------
+========================
 
 Your connection to libwiggleport itself.
 
@@ -27,7 +27,7 @@ Your connection to libwiggleport itself.
 
 
 Finding Hardware Models
------------------------
+=======================
 
 The enumerator can find hardware models, and get hotplug notifications.
 
@@ -53,7 +53,7 @@ The model is a data tree for interacting with hardware.
 
 
 Streaming Data
---------------
+==============
 
 Streams are Wiggleport's interface for real-time input and output.
 
@@ -77,7 +77,7 @@ Streams are Wiggleport's interface for real-time input and output.
 
 
 Tuples
-------
+======
 
 A tuple is an observed set of values from the model.
 
@@ -103,7 +103,7 @@ A tuple is an observed set of values from the model.
 
 
 Actions
--------
+=======
 
 An action is a change that can be applied to the model.
 
@@ -123,7 +123,7 @@ An action is a change that can be applied to the model.
 
 
 Scheduled Events
-----------------
+================
 
 A Schedule is Wiggleport's representation of some planned events happening at a particular time across one or more streams.
 
@@ -143,7 +143,7 @@ A Schedule is Wiggleport's representation of some planned events happening at a 
 
 
 Package Management
-------------------
+==================
 
 Packages generate models based on the attached hardware.
 By default, libwiggleport loads a standard set of packages. Most programs

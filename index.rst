@@ -1,8 +1,8 @@
 .. _wiggleport-guidebook:
 
-********************
+====================
 Wiggleport Guidebook
-********************
+====================
 
 Welcome to the documentation for using and extending Wiggleport_.
 
