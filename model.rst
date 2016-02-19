@@ -248,7 +248,7 @@ Constructors are used for making :ref:`stream-objects`, and for linking together
 Constructor    Description                                        Section
 ============== ================================================== ============================
 **@class**     Attachment point for other JSON objects            :ref:`json-packages`
-**@driver**    Attachment point for I/O drivers                   :ref:`io-drivers`
+**@driver**    Attachment point for I/O drivers                   :ref:`json-packages`
 **@buffer**    Buffered stream object                             :ref:`stream-objects`
 **@pattern**   Patterned stream object                            :ref:`stream-objects`
 ============== ================================================== ============================
