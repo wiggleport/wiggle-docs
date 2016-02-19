@@ -228,6 +228,32 @@ Valid identifiers::
   🐱: true
 
 
+.. _constructors:
+
+Constructors
+============
+
+.. highlight:: yaml
+
+On their own, the numbers and strings in a hardware model are just lifeless data. Even expression strings don't come to life until, by reference, we find out that they must be interpreted as expressions. In :ref:`json-models` we have a convention that data only becomes *live* in ways explained by object members beginning with a `@` symbol, known as *constructors*:
+
+.. productionlist::
+  constructor: "@" `id_continue`+
+
+As soon as a constructor becomes part of the model, it has an immediate effect, based on the constructor's name and the object's other members. If an unrecognized constructor loads, it will immediately cause an error.
+
+Constructors are used for making :ref:`stream-objects`, and for linking together :ref:`json-packages`. These constructed objects are discussed in detail in their own sections.
+
+============== ================================================== ============================
+Constructor    Description                                        Section
+============== ================================================== ============================
+`@class`       Attachment point for other JSON objects            :ref:`json-packages`
+`@driver`      Attachment point for I/O drivers                   :ref:`io-drivers`
+`@buffer`      Buffered stream object                             :ref:`stream-objects`
+`@pattern`     Patterned stream object                            :ref:`stream-objects`
+============== ================================================== ============================
+
+
 .. _IEEE double: https://en.wikipedia.org/wiki/Double-precision_floating-point_format
 .. _JSON: http://json.org
 .. _YAML: http://yaml.org

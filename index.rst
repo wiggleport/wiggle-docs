@@ -35,6 +35,7 @@ Welcome to the documentation for using and extending Wiggleport_.
    wigglemod
    logic
    packages
+   lowlevio
 
 .. image:: /images/wiggle-spine.*
    :width: 75%

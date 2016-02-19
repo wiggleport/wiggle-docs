@@ -1,5 +1,6 @@
 .. default-role:: literal
 
+.. _stream-objects:
 
 ==============
 Stream Objects

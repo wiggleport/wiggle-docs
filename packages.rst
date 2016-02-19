@@ -1,3 +1,5 @@
+.. _json-packages:
+
 =============
 JSON Packages
 =============
