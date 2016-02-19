@@ -8,11 +8,11 @@ Expression Syntax
 
 .. highlight:: yaml
 
-Plain :ref:`numbers` in the hardware model are useful for values that never change: version codes, fixed addresses, communication protocol constants, and so on.
+Regular :ref:`numbers` in the hardware model are useful for values that never change: version codes, fixed addresses, communication protocol constants, and so on.
 
 With *expressions*, the hardware model can represent a graph of related values and determine their finite space of allowable configurations. Expressions are great for clock rates, hardware settings, volume levels, or any other values that can change but only in carefully controlled ways.
 
-Expressions are :ref:`strings` formatted according to a mini-language that can use :ref:`references` to link with expressions and values elsewhere in the model.
+Expressions are :ref:`strings` formatted according to a mini-language that can use :ref:`references` to link with values and other expressions elsewhere in the model.
 
 .. productionlist::
   expression: `reference` | `number` | `variable` | `enclosure`
@@ -27,15 +27,17 @@ Every expression and subexpression can be evaluated to a number. Just like with 
 Life Cycle
 ==========
 
-After an expression loads, it resolves to a number right away. That number may change at any time, and the expression's instantiator will be notified of the new value. As long as the expression is loaded, it has the ability to both observe and influence the other values it's linked to.
+After an expression loads, it resolves to a number right away. That number may change at any time, and the object containing that expression will be notified of the new value. As long as the expression is loaded, it has the ability to both observe and influence the other values it's linked to.
 
-Expressions in the model remain loaded as long as their corresponding portion of the model, typically rooted in some physical hardware that we can detect being plugged and unplugged.
+Expressions in the model remain loaded as long as their corresponding portion of the model. Typically this is rooted in some physical hardware that we can detect as it's plugged in or unplugged.
 
-In addition, temporary expressions may be created and destroyed explicitly using the API. Temporary constraints can be thought of as requests at runtime to reconfigure the hardware in a particular way.
+In addition, temporary expressions may be created and destroyed explicitly using the API. They can be used as status observers, and temporary constraints can be thought of as requests at runtime to reconfigure the hardware in a particular way.
 
 
 Examples
 ========
+
+.. highlight:: yaml
 
 That got abstract fast, but here's an example. This is a YAML_ object modeling a simple baud_ rate generator. For this to parse, we'll need to know *a priori* that `baud` is an expression. The other expressions `clock.rate` and `divisor` can be inferred by their mentions in `baud`. ::
 
@@ -57,6 +59,30 @@ That got abstract fast, but here's an example. This is a YAML_ object modeling a
   # to approximate 19200 baud.
 
   baud: clock.rate / divisor :~ 19200
+
+With this model, the baud generator will default to exactly 19200 baud. The constraints are quite loose at this point, and many equivalent configurations are available to choose from after we reach the minimum `clock.rate` of 1 MHz:
+
+============ ========== ==========
+clock.rate   divisor    baud
+============ ========== ==========
+1017600      53         19200
+1036800      54         19200
+1056000      55         19200
+...          ...        ...
+4896000      255        19200
+============ ========== ==========
+
+When the hardware model loads, one of these configurations will be chosen arbitrarily. Now imagine an application arrives and wants to configure the baud rate for something higher. Using the API, it loads a temporary expression like ``baud := 115200``. Now the list of valid configurations has changed, and the hardware will reconfigure to an arbitrary rate from this new set:
+
+============ ========== ==========
+clock.rate   divisor    baud
+============ ========== ==========
+1036800      9          115200
+1152000      10         115200
+1267200      11         115200
+...          ...        ...
+4953600      43         115200
+============ ========== ==========
 
 
 .. _expression-constants:
