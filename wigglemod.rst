@@ -10,12 +10,11 @@ Module Connector
 ================
 
 .. figure:: /images/68021-220HLF.*
-   :figwidth: 35 %
+   :figwidth: 30 %
    :alt: Photo of Amphenol 68021-220HLF
    :align: right
 
-   A 2x10 right angle 2.54mm header, the Amphenol 68021-220HLF.
-   Gold plated even!
+   Male dual-row right angle 2.54mm header.
 
 Each module connector is a right angle **dual-row** female header, with **20 contacts** on 2.54mm / 0.1" centers. These headers are compatible with common prototyping jumpers, and they're available from many sources in both surface-mount and through-hole varieties.
 
@@ -50,20 +49,29 @@ Pinout Table
 
 The pin numbering alternates between rows, starting with pin 1 identified using both a printed arrow and a square solder pad.
 
-------------------- ----- ----- -------------------
-Function →          Pin   Pin   ← Function
-=================== ===== ===== ===================
-GPIO [#gpio]_       1     2     GPIO
-GPIO                3     4     GPIO
-GPIO                5     6     GPIO
-GPIO / SCL [#det]_  7     8     GPIO / SDA
-Ground              9     10    Ground
-3.3V                11    12    3.3V
-5V                  13    14    5V
-5-24V (-) [#pgnd]_  15    16    5-24V (-)
-5-24V (-)           17    18    5-24V (+)
-5-24V (+)           19    20    5-24V (+)
-------------------- ----- ----- -------------------
++---------------------+-------+-------+---------------------+
+| Function →          | Pin   | Pin   | ← Function          |
++=====================+=======+=======+=====================+
+| GPIO [#gpio]_       | 1     | 2     | GPIO                |
++---------------------+-------+-------+---------------------+
+| GPIO                | 3     | 4     | GPIO                |
++---------------------+-------+-------+---------------------+
+| GPIO                | 5     | 6     | GPIO                |
++---------------------+-------+-------+---------------------+
+| GPIO / SCL [#det]_  | 7     | 8     | GPIO / SDA          |
++---------------------+-------+-------+---------------------+
+| Ground              | 9     | 10    | Ground              |
++---------------------+-------+-------+---------------------+
+| 3.3V                | 11    | 12    | 3.3V                |
++---------------------+-------+-------+---------------------+
+| 5V                  | 13    | 14    | 5V                  |
++---------------------+-------+-------+---------------------+
+| 5-24V (-) [#pgnd]_  | 15    | 16    | 5-24V (-)           |
++---------------------+-------+-------+---------------------+
+| 5-24V (-)           | 17    | 18    | 5-24V (+)           |
++---------------------+-------+-------+---------------------+
+| 5-24V (+)           | 19    | 20    | 5-24V (+)           |
++---------------------+-------+-------+---------------------+
 
 .. [#gpio] All General Purpose I/O pins are 3.3V LVCMOS compatible. Inputs are not 5V tolerant!
 
