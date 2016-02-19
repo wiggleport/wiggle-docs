@@ -20,12 +20,3 @@ Pattern Streams
 ===============
 
 State machines, yo.
-
-.. _ternary: https://en.wikipedia.org/wiki/Ternary_operation
-.. _baud: https://en.wikipedia.org/wiki/Baud
-.. _IEEE double: https://en.wikipedia.org/wiki/Double-precision_floating-point_format
-.. _JSON: http://json.org
-.. _YAML: http://yaml.org
-.. _hexadecimal: https://en.wikipedia.org/wiki/Hexadecimal
-.. _Unicode: https://en.wikipedia.org/wiki/Unicode
-
