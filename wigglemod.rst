@@ -3,7 +3,7 @@
    :width: 100%
    :alt: Wigglemod Spec Diagram
 
-.. _wigglemod:
+.. _module-connector:
 
 ================
 Module Connector
@@ -80,14 +80,6 @@ The pin numbering alternates between rows, starting with pin 1 identified using 
 .. [#pgnd] The 5-24V power supply has a separate ground return available, in order to reduce noise currents through the main digital ground.
 
 
-.. _pmod-compat:
-
-PMOD Compatibility
-==================
-
-Let's talk pmods, mkay!
-
-
 .. _electrical-characteristics:
 
 Electrical Characteristics
@@ -138,5 +130,35 @@ Electrical Characteristics
 Mechanical Characteristics
 ==========================
 
-Bloop!
++-----------------------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+-------+
+| Symbol                      | Parameter Description       | Minimum                     | Typical                     | Maximum                     | Units |
++=============================+=============================+=============================+=============================+=============================+=======+
+| w\ :subscript:`mod`         | Module width                |                             | 26.0                        | 27.5                        | mm    |
++-----------------------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+-------+
+| d\ :subscript:`mod`         | Module to module distance   |                             | 27.94                       |                             | mm    |
++-----------------------------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+-------+
+
+The :ref:`module-connector` is mounted flat against the edge of the Wiggle Spine board.
+
+Specifications for plastic enclosures and module lengths are TBD.
+
+
+.. _pmod-compat:
+
+Comparison with Pmod
+====================
+
+The Pmod interface is a common low-speed digital interconnect commonly used for FPGA development board add-ons. It's described in detail by the `Digilent Pmod Interface Specification`_.
+
+The Wigglemod connector is not fully compatible with Pmod, but with some care the interfaces are close enough that existing Pmod boards can be a good starting point if you're trying to do something new with Wiggleport.
+
+* Pmod interfaces can be either 6-pin (single row) or 12-pin (dual row).
+* Wigglemods are always 20-pin.
+* Wigglemods always use 3.3V logic.
+* Pins 1-12 in the :ref:`pinout-table` match the dual row Pmod pinout.
+* Take care that pins 13-20 are not making contact with the Pmod.
+* Wigglemod GPIOs do not have series current limiting resistors. This can require care to avoid I/O contention, but the tradeoff is that Wigglemod GPIOs can operate at higher bit rates and with sharper edge transitions, which can be necessary in some Wiggleport applications.
+* The module detection process will drive pins 7 and 8 with arbitrary waveforms, typically I²C probe patterns. If this can cause problems, you may need to modify the Pmod or take special measures to disable autodetection.
+
+.. _Digilent Pmod Interface Specification: http://digilentinc.com/Pmods/Digilent-Pmod_%20Interface_Specification.pdf
 
