@@ -150,7 +150,7 @@ Comparison with Pmod
 
 The Pmod interface is a common low-speed digital interconnect commonly used for FPGA development board add-ons. It's described in detail by the `Digilent Pmod Interface Specification`_.
 
-The Wigglemod connector is not fully compatible with Pmod, but with some care the interfaces are close enough that existing Pmod boards can be a good starting point if you're trying to do something new with Wiggleport.
+The Wigglemod connector is not fully compatible with Pmod, but with some care the interfaces are close enough that existing Pmod boards can be a good starting point when you're trying to do something new with Wiggleport.
 
 * Pmod interfaces can be either 6-pin (single row) or 12-pin (dual row).
 * Wigglemods are always 20-pin.

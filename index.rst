@@ -19,6 +19,8 @@ Welcome to the documentation for using and extending Wiggleport_.
    :caption: Model Reference
 
    model
+   expressions
+   streams
 
 .. toctree::
    :maxdepth: 2
