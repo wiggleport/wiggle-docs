@@ -100,43 +100,49 @@ Constants
 The simplest expression is a *constant*, serving the same function as plain JSON :ref:`numbers`. These values can be relied on to never change unless that part of the model is reloaded. Each numeric constant in an expression may use decimal, hexadecimal_, octal, binary, or floating point notations.
 
 .. productionlist::
-  digit_separator: "_"?
+  digit_sep: "_"?
 
 In numeric constants, underscore characters may be used to visually separate digits.
 
 .. productionlist::
-  negative_prefix: "-"?
-  decimal_integer: `negative_prefix` 1-9 ( `digit_separator` 0-9 )*
-
-Examples::
-
-  42
-  -100_000
-  1_2_300
-
-.. productionlist::
-  hex_prefix: "0x" | "0X"
-  hex_digit: 0-9 | a-f | A-F
-  hex_integer: `negative_prefix` `hex_prefix` `hex_digit` ( `digit_separator` `hex_digit` )*
-
-Examples::
-
-  0x4a42_0D9C_9944abcd
-  0X4
-  -0x2000
-
-.. productionlist::
-  octal_integer: `negative_prefix` "0" ( `digit_separator` 0-7 )*
+  negative: "-"?
+  decimal_integer: `negative` "0" |
+                 : `negative` 1-9 ( `digit_sep` 0-9 )*
 
 Examples::
 
   0
-  0477
-  -010
+  -0
+  42
+  -100_000
+  1_2_300
+
+Note that leading zeroes are not allowed in decimal constants, to prevent ambiguity with a common method of writing octal constants in C-like langauges.
+
+.. productionlist::
+  hex_prefix: "0x" | "0X"
+  hex_digit: 0-9 | a-f | A-F
+  hex_integer: `negative` `hex_prefix` `hex_digit` ( `digit_sep` `hex_digit` )*
+
+Examples::
+
+  0x4a42_0D9C_9944abcd
+  0X04
+  -0x2000
+
+.. productionlist::
+  oct_prefix: "0o" | "0O"
+  oct_digit: 0-7
+  octal_integer: `negative` `oct_prefix` `oct_digit` ( `digit_sep` `oct_digit` )*
+
+Examples::
+
+  0o477
+  -0O0010_4000
 
 .. productionlist::
   binary_prefix: "0b" | "0B"
-  binary_integer: `negative_prefix` `binary_prefix` 0-1 ( `digit_separator` 0-1 )*
+  binary_integer: `negative` `binary_prefix` 0-1 ( `digit_sep` 0-1 )*
 
 Examples::
 
@@ -147,10 +153,10 @@ Examples::
 .. productionlist::
   exponent_prefix: "e" | "E"
   sign: "+" | "-"
-  digits: 0-9 ( `digit_separator` 0-9 )*
+  digits: 0-9 ( `digit_sep` 0-9 )*
   real_exponent: `exponent_prefix` `sign`? `digits`
-  real_mantissa: `negative_prefix` `digits`? "." `digits` |
-               : `negative_prefix` `digits` "."
+  real_mantissa: `negative` `digits`? "." `digits` |
+               : `negative` `digits` "."
   real_number: `real_mantissa` `real_exponent`? |
              : `decimal_integer` `real_exponent`
 
