@@ -18,6 +18,9 @@ import os
 # Python extensions relative to the current directory
 sys.path.insert(0, os.path.abspath('_extensions'))
 
+def setup(app):
+    app.add_stylesheet('css/custom.css')
+
 # -- General configuration ------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
@@ -31,7 +34,7 @@ extensions = [
 ]
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
+templates_path = []
 
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
