@@ -9,8 +9,8 @@ Wiggleport Guidebook
    * :ref:`table-of-contents`
 
 .. image:: /images/wiggleport-intro.*
-   :width: 100%
    :alt: Wiggleport Intro Graphic
+   :class: full-width-graphic
 
 
 .. _table-of-contents:

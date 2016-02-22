@@ -1,7 +1,7 @@
 
 .. image:: /images/wigglemod-spec.*
-   :width: 100%
    :alt: Wigglemod Spec Diagram
+   :class: full-width-graphic
 
 .. _module-connector:
 

@@ -1,0 +1,19 @@
+.rst-content img.full-width-graphic {
+	width: 106%;
+	max-width: 150%;
+	left: -3%;
+	position: relative;
+	overflow: visible;
+	display: block;
+}
+
+@media screen and (max-width: 768px) {
+	.rst-content img.full-width-graphic {
+		width: 111%;
+		max-width: 150%;
+		left: -5.5%;
+		position: relative;
+		overflow: visible;
+		display: block;
+	}
+}
