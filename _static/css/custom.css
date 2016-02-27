@@ -7,6 +7,10 @@
 	display: block;
 }
 
+.wy-nav-top {
+	line-height: 2em;
+}
+
 @media screen and (max-width: 768px) {
 	.rst-content img.full-width-graphic {
 		width: 111%;
