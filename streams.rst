@@ -1,10 +1,10 @@
 .. default-role:: literal
 
-.. _stream-objects:
+.. _streams:
 
-==============
-Stream Objects
-==============
+=======
+Streams
+=======
 
 In the abstract, a stream is just an interface for flowing data. Data come packaged as *items* of a fixed or variable size in bits, and these items flow either a fixed or variable rate. Wiggleport models hardware communication using networks of interconnected streams.
 

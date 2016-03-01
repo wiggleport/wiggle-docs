@@ -1,10 +1,50 @@
 .. default-role:: literal
+.. _ternary: https://en.wikipedia.org/wiki/Ternary_operation
+.. _baud: https://en.wikipedia.org/wiki/Baud
+.. _IEEE double: https://en.wikipedia.org/wiki/Double-precision_floating-point_format
+.. _JSON: http://json.org
+.. _YAML: http://yaml.org
+.. _hexadecimal: https://en.wikipedia.org/wiki/Hexadecimal
+.. _mathematical expressions: https://en.wikipedia.org/wiki/Expression_(mathematics)
+.. _mechanical linkage: https://en.wikipedia.org/wiki/Linkage_(mechanical)
+.. _magnetron: https://en.wikipedia.org/wiki/Cavity_magnetron
+.. _phase-locked loop: https://en.wikipedia.org/wiki/Phase-locked_loop
 
-.. _expressions:
+.. _linkages:
 
-=================
-Expression Syntax
-=================
+========
+Linkages
+========
+
+While :ref:`json-models` stand for values and structures that are immovable as long as the hardware stays attached, *linkages* are Wiggleport's way of representing settings and inputs that can move and slide, but maybe only in carefully controlled ways.
+
+.. figure:: /images/Pantograph_Mirror.*
+  :figwidth: 40 %
+  :align: right
+
+  Animation of a `mechanical linkage`_ that supports a mirror as it moves along a controlled path.
+  `(source) <https://en.wikipedia.org/wiki/File:Pantograph_Mirror.gif>`__
+
+Linkages are like `mathematical expressions`_. You can use them to define values based on the result of a calculation. Like their mechanical namesake, our linkages both push and pull; they can transmit changes and they can transmit constraints.
+
+In most hardware, there are configurations that shouldn't be allowed. In a microwave oven, for example, its magnetron_ should never operate when the door is open. In this case, a foolproof safety interlock switch solves the problem neatly.
+
+Often the disallowed configurations are more subtle, and the consequences for failure are usually far less severe. Usually the incorrect configurations are just won't work at all, or won't work reliably. For example, a hardware clock divisor may implement only a limited range of values, or a `phase-locked loop`_ may only be guaranteed to lock within particular range of input frequencies.
+
+In more severe cases, we might be relying on rules for how the hardware operates in order to avoid damaging it.
+
+Depending on where and when you live, you might have a socket on the wall that promises to hand over about a kilowatt of electricity without complaint. If you ask this from every single socket in your house, however, you'll have a problem. Specifically, your house is now dark thanks to the circuit breaker protecting your wiring from overload.
+
+Slight possibility of overload...
+
+.. image:: /images/slight-overload-01.*
+   :alt: Stylized still frame from Back to the Future
+   :class: full-width-graphic
+
+.. image:: /images/slight-overload-02.*
+   :alt: Sketch of the amplifier control panel
+   :class: full-width-graphic
+
 
 .. highlight:: yaml
 
@@ -314,9 +354,3 @@ Conflicts in strong constraints are disallowed entirely. If a model can't meet a
 If multiple weak constraints apply to the same variable, they will be prioritized by their distance from this variable in the expression graph. Weak constraints farther from a variable can override weak constraints closer to the same variable.
 
 
-.. _ternary: https://en.wikipedia.org/wiki/Ternary_operation
-.. _baud: https://en.wikipedia.org/wiki/Baud
-.. _IEEE double: https://en.wikipedia.org/wiki/Double-precision_floating-point_format
-.. _JSON: http://json.org
-.. _YAML: http://yaml.org
-.. _hexadecimal: https://en.wikipedia.org/wiki/Hexadecimal

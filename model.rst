@@ -24,7 +24,7 @@ JSON_ supports integers like ``524287`` and ``-42``, or floating point numbers l
 
 .. highlight:: yaml
 
-In modeling hardware, it's often helpful to use hexadecimal_ numbers. JSON does not support hexadecimal numbers, but both YAML_ and Wiggleport's :ref:`expressions` support hex numbers like ``0x2AF0`` and ``0x100000000``.
+In modeling hardware, it's often helpful to use hexadecimal_ numbers. JSON does not support hexadecimal numbers, but both YAML_ and Wiggleport's :ref:`linkages` support hex numbers like ``0x2AF0`` and ``0x100000000``.
 
 
 .. _strings:
@@ -32,7 +32,7 @@ In modeling hardware, it's often helpful to use hexadecimal_ numbers. JSON does 
 Strings
 =======
 
-Strings of Unicode_ characters can take on a variety of roles in Wiggleport's hardware models. On its own, a string has no implied format. It can represent freeform metadata like a device's name or its version. :ref:`expressions` use specially formatted strings to represent rules for values that can change.
+Strings of Unicode_ characters can take on a variety of roles in Wiggleport's hardware models. On its own, a string has no implied format. It can represent freeform metadata like a device's name or its version. :ref:`linkages` use specially formatted strings to represent rules for values that can change.
 
 In JSON_, all strings must be surrounded with double-quotes. Much of YAML_'s readability comes from relaxing this requirement. Quotes can often be entirely omitted in YAML_, as the parser assumes any unintelligible data must be a string value.
 
@@ -167,7 +167,7 @@ For example, in YAML_, the following references `ref1` through `ref8` are string
       ref7: deeper.name         # → "inner"
       ref8: inside.deeper.name  # → "inner"
 
-The consequences for an invalid reference depend on context. For example, :ref:`expressions` will not parse if any references within fail to resolve. Typically this will lead to a reported error as soon as that part of the model loads.
+The consequences for an invalid reference depend on context. For example, :ref:`linkages` will not parse if any references within fail to resolve. Typically this will lead to a reported error as soon as that part of the model loads.
 
 
 .. _identifiers:
@@ -235,12 +235,12 @@ Constructors
 
 .. highlight:: yaml
 
-On their own, the numbers and strings in a hardware model are just lifeless data. Even expression strings don't come to life until, by reference, we find out that they must be interpreted as expressions. In :ref:`json-models` we have a convention: data only become *live* in ways explained by object members known as *constructors*. You can identify a constructor by it's `@` prefix:
+On their own, the numbers and strings in a hardware model are just lifeless data. Even :ref:`linkages` don't come to life until, by reference, we find out that they must be parsed as linkage strings. In :ref:`json-models` we have a convention: data only become *live* in ways explained by object members known as *constructors*. You can identify a constructor by it's `@` prefix:
 
 .. productionlist::
   constructor: "@" `id_continue`+
 
-Constructors are used for making :ref:`stream-objects`, and for linking together :ref:`json-packages`. These live objects are described in detail by their own sections:
+Constructors are used for making :ref:`streams`, and for linking together :ref:`json-packages`. These live objects are described in detail by their own sections:
 
 ============== ================================================== ============================
 Constructor    Description                                        Section
