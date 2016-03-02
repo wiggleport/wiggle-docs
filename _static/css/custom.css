@@ -13,9 +13,9 @@
 
 @media screen and (max-width: 768px) {
 	.rst-content img.full-width-graphic {
-		width: 111%;
+		width: 112%;
 		max-width: 150%;
-		left: -5.5%;
+		left: -6%;
 		position: relative;
 		overflow: visible;
 		display: block;

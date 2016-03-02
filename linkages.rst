@@ -54,9 +54,34 @@ To understand Wiggleport's *linkages*, let's start with a mechanical analogy for
 The horizontal *x* axis will represent some power levels that can change while the amplifier is on. The sliding rack with an arrow represents one *variable* that can change at any time, like perhaps the power setting for the first stage of the amplifier.
 
 .. figure:: /images/linkage-intro-1.*
-  :figwidth: 80%
+  :figwidth: 90%
   :align: center
-  :alt: One mechanical 'ruler' pointing at the number four
+  :alt: One mechanical 'ruler' pointing at the number four.
+
+.. figure:: /images/linkage-intro-2.*
+  :figwidth: 90%
+  :align: center
+  :alt: Two mechanical rulers, pointing at 4 and 2.
+
+.. figure:: /images/linkage-intro-3.*
+  :figwidth: 90%
+  :align: center
+  :alt: A pinion gear is added, pointing at 3.
+
+.. figure:: /images/linkage-intro-4.*
+  :figwidth: 90%
+  :align: center
+  :alt: The first rack moves to point at 10, and the pinion now points at 6.
+
+.. figure:: /images/linkage-intro-5.*
+  :figwidth: 90%
+  :align: center
+  :alt: The pinion gear is blocked from moving any higher.
+
+.. figure:: /images/linkage-intro-6.*
+  :figwidth: 90%
+  :align: center
+  :alt: When the bottom ruler moves to 11, the pinion spins and pushes the top rack down to 1.
 
 Etc.
 
