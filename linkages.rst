@@ -10,6 +10,7 @@
 .. _pantograph: https://en.wikipedia.org/wiki/Pantograph
 .. _magnetron: https://en.wikipedia.org/wiki/Cavity_magnetron
 .. _phase-locked loop: https://en.wikipedia.org/wiki/Phase-locked_loop
+.. _Back to the Future: https://en.wikipedia.org/wiki/Back_to_the_Future
 
 .. _linkages:
 
@@ -17,7 +18,7 @@
 Linkages
 ========
 
-While :ref:`json-models` stand for values and structures that are immovable as long as the hardware stays attached, *linkages* are Wiggleport's way of representing settings and inputs that can move and slide, but maybe only in carefully controlled ways.
+While fixed  :ref:`json-models` stand for values and structures that are immovable as long as the hardware stays attached, *linkages* are Wiggleport's way of representing settings and inputs that can change in carefully controlled ways.
 
 Linkages are based on `mathematical expressions`_: you can use them to define values based on the result of a calculation. Like their mechanical namesake, these linkages can both push and pull: they can transmit changes and they can transmit constraints.
 
@@ -39,13 +40,26 @@ In more severe cases, we might be relying on rules for how the hardware operates
 
 .. [#bttf] With apologies to Robert Zemeckis, Michael J. Fox, and Stan Lee.
 
+In this opening scene from `Back to the Future`_ (1985) the young protagonist Marty just wants to play his guitar as loud as possible on that giant speaker, somehow, using all of these knobs and switches. The system, if a bit cartoonish, is also very low-level. There's no software in-between Marty's hands and the actual voltages that run the amplifier's internals.
+
+.. figure:: /images/slight-overload-02.*
+  :figwidth: 90%
+  :align: center
+  :alt: Sketch of the amplifier control panel
+
+At a deep enough level, modern systems aren't so different. We usually have software drivers that must be written to include a set of rules that keep the hardware state consistent with what's expected of it.
+
+To understand Wiggleport's *linkages*, let's start with a mechanical analogy for something like that amplifier control panel.
+
+The horizontal *x* axis will represent some power levels that can change while the amplifier is on.
 
 
+ This horizontal ruler will represent one *variable* that can change at any time, like perhaps the power setting for the first stage of the amplifier.
 
-.. image:: /images/slight-overload-02.*
-   :alt: Sketch of the amplifier control panel
-   :class: full-width-graphic
-
+.. figure:: /images/linkage-intro-1.*
+  :figwidth: 80%
+  :align: center
+  :alt: One mechanical 'ruler' pointing at the number four
 
 .. highlight:: yaml
 
