@@ -32,7 +32,7 @@ In most hardware, there are configurations that shouldn't be allowed. In a micro
 
 Often the disallowed configurations are more subtle, and the consequences for failure are typically much less severe. Usually the incorrect configurations are just won't work at all, or won't work reliably. For example, a hardware register may implement only a limited range of values, or a `phase-locked loop`_ may only be guaranteed to lock within particular range of input frequencies.
 
-In more severe cases, we might be relying on rules for how the hardware operates in order to avoid damaging it. Depending on where and when you live, you might have a socket on the wall that promises to hand over about a kilowatt of electricity without complaint. If you ask this from every single socket in your house, however, you'll have a problem. With great power comes the slight possibility of overload. [#bttf]_
+In more severe cases, we might be relying on rules for how the hardware operates in order to avoid damaging it. Depending on where and when you live, you might have a socket on the wall that promises to hand over about a kilowatt of electricity without complaint. If you ask this from every single socket in your house, however, you'll have a problem. With great power comes the *slight* possibility of overload. [#bttf]_
 
 .. image:: /images/slight-overload-01.*
    :alt: Stylized still frame from Back to the Future
@@ -51,15 +51,14 @@ At a deep enough level, modern systems aren't so different. We usually have soft
 
 To understand Wiggleport's *linkages*, let's start with a mechanical analogy for something like that amplifier control panel.
 
-The horizontal *x* axis will represent some power levels that can change while the amplifier is on.
-
-
- This horizontal ruler will represent one *variable* that can change at any time, like perhaps the power setting for the first stage of the amplifier.
+The horizontal *x* axis will represent some power levels that can change while the amplifier is on. The sliding rack with an arrow represents one *variable* that can change at any time, like perhaps the power setting for the first stage of the amplifier.
 
 .. figure:: /images/linkage-intro-1.*
   :figwidth: 80%
   :align: center
   :alt: One mechanical 'ruler' pointing at the number four
+
+Etc.
 
 .. highlight:: yaml
 
