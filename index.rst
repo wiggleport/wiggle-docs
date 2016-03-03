@@ -25,15 +25,16 @@ Welcome to the documentation for using and extending Wiggleport_.
 
 .. toctree::
    :maxdepth: 2
-   :caption: Model Reference
+   :caption: Hardware Models
 
    model
+   frame
    linkages
    streams
 
 .. toctree::
    :maxdepth: 2
-   :caption: API Reference
+   :caption: Application Programming Interface
 
    api/c
 

@@ -285,10 +285,10 @@ Example constants and references, in a YAML_ object::
     still_the_same_answer: also_the_answer
 
 
-.. _arithmetic-opers:
+.. _computation:
 
-Arithmetic Operators
-====================
+Computation
+===========
 
 Expressions can be new values computed from multiple existing values, using many of the same unary and binary operators you may know from other programming languages. Each of these expressions sets up a *data flow*, where changes to the inputs will automatically cause an observable change in the expression's result.
 
@@ -356,10 +356,10 @@ Expressions can be new values computed from multiple existing values, using many
 .. [#comma] The comma operator `a, b` evaluates both expressions, but keeps only value `b`. The expression `a` may still contribute by including expression references or constraints.
 
 
-.. _constraint-opers:
+.. _constraints:
 
-Constraint Operators
-====================
+Constraints
+===========
 
 Wiggleport uses a system of *constraints* for modeling the relationship between hardware capabilities and requirements. Operators and keywords beginning with a colon (`:`) are related to constraints.
 

@@ -41,17 +41,17 @@ In the GPS receiver example, the model's streams would establish a data flow for
 Concretely, this interface may be backed either by a *buffer* or by a *pattern*.
 
 
-.. _buffer-streams:
+.. _buffers:
 
-Buffer Streams
-==============
+Buffers
+=======
 
 A thing made of memory! Shared memory even.
 
 
-.. _pattern-streams:
+.. _patterns:
 
-Pattern Streams
-===============
+Patterns
+========
 
 State machines, yo.
