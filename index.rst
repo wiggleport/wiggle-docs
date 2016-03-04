@@ -34,7 +34,7 @@ Welcome to the documentation for using and extending Wiggleport_.
 
 .. toctree::
    :maxdepth: 2
-   :caption: Application Programming Interface
+   :caption: Programming Interface
 
    api/c
 
